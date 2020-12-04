@@ -9,8 +9,8 @@
 {% block container %}
 
     
-    {% if form.error %}
-        <div class="alert alert-danger">Your username and password didn't match try again</div>
+    {% if form.errors %}
+        <div class="alert alert-danger">Tu usuario y contraseña no coinciden.</div>
     {% endif %}
         
 
@@ -34,7 +34,6 @@
         
     </form>
     
-    <p class="mt-4">Don't have an account yet? <a href="{% url "users:signup" %}">Sign up here.</a></p>
     
     {% endblock container %}
     

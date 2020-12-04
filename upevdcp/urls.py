@@ -22,7 +22,7 @@ from django.http import HttpResponse
 
 
 def hello_world(request):
-    return render(request,'dashboard/base.html')
+    return render(request,'coordinadorUPEV/dashboardUPEV.html')
 
 
 urlpatterns = [

@@ -14,8 +14,6 @@ class UsersRole(models.Model):
     #user extensio
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-    
-
     #Users role
     COORDINADORUPEV = 'admin'
     COORDINADORUTEYCV = 'uteycv'

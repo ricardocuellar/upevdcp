@@ -5,6 +5,10 @@ html, body {
     font-family: 'Roboto', sans-serif;
 }
 
+body{
+    padding-top: 70px;
+}
+
 #auth-container {
     background: #fff;
     border: 1px solid #e6e6e6;
@@ -43,3 +47,5 @@ html, body {
 #user-posts #post-thumb {
     background: #fff;
 }
+
+

@@ -15,12 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.shortcuts import render
+
 
 from django.http import HttpResponse
 
 
 def hello_world(request):
-    return HttpResponse('Hello, world!')
+    return render(request,'coordinadorUPEV/dashboardUPEV.html')
 
 
 urlpatterns = [

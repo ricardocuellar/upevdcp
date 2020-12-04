@@ -1,0 +1,40 @@
+{%extends "users/base.html" %}
+
+
+{% block head_content %}
+<title>UPEV | Inicio de Sesión</title>
+{% endblock head_content %}
+    
+
+{% block container %}
+
+    
+    {% if form.error %}
+        <div class="alert alert-danger">Your username and password didn't match try again</div>
+    {% endif %}
+        
+
+    <form method="POST" action="{% url "users:login" %}">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <input type="text" placeholder="Username" name="username" id="" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <input type="password" placeholder="Password"name="password" id=""  class="form-control">
+        </div>
+
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary btn-block mt-5"value="Sig in" class="form-control" >
+        </div>
+
+        
+        
+        
+    </form>
+    
+    <p class="mt-4">Don't have an account yet? <a href="{% url "users:signup" %}">Sign up here.</a></p>
+    
+    {% endblock container %}
+    

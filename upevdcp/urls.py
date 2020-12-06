@@ -15,26 +15,26 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 
 from django.http import HttpResponse
 
-
-def hello_world(request):
-    return render(request,'coordinadorUPEV/dashboardUPEV.html')
-
+def root_to_dashboard(request):
+    return redirect('/dashboard')
 
 urlpatterns = [
 
     #Root
-    path('', hello_world),
-
+    path('', root_to_dashboard),
     #Admin panel
     path('admin/', admin.site.urls),
     
     #Login System
     path('users/',include(('users.urls','users'),namespace = 'users')),
+
+    #Dashboard
+    path('dashboard/',include(('dashboard.urls','dashboard'), namespace = 'dashboard')),
 
 
 ]

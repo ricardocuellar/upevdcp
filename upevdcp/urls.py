@@ -21,7 +21,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 def root_to_dashboard(request):
-    return redirect('/dashboard')
+     return redirect('/dashboard')
 
 urlpatterns = [
 

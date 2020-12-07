@@ -12,7 +12,8 @@ urlpatterns = [
     #Management
     path(
         route='', 
-        view=views.DashboardView.as_view(),
+        view= views.DashboardTemplate,
+        #view= views.DashboardView.as_view(),
         name='dashboard'
         ),
     

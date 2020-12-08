@@ -10,8 +10,8 @@
             <ul class="navbar-nav mr-auto ">
 
                 <li class="nav-item">
-                    <p class="mb-0 px-2"><strong>Ricardo Cuéllar</strong></p>
-                    <p class="mb-0 px-2">Personal UPEV</p>
+                    <p class="mb-0 px-2"><strong>{{request.user}}</strong></p>
+                    <p class="mb-0 px-2">{{request.user.usersrole.role}}</p>
                 </li>
 
                 <li class="nav-item">

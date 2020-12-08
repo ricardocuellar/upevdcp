@@ -16,6 +16,21 @@ urlpatterns = [
         #view= views.DashboardView.as_view(),
         name='dashboard'
         ),
+    path(
+        route='admin',
+        view = views.test_admin,
+        name='admin'
+    ),
+    path(
+        route='uteycv',
+        view = views.test_uteycv,
+        name='uteycv'
+    ),
+    path(
+        route='evaluador',
+        view = views.test_evaluador,
+        name='evaluador'
+    ),
     
 
 ]

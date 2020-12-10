@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'unidadAcademica',
     'carreras',
     'materias',
+    'etps',
 ]
 
 MIDDLEWARE = [

@@ -5,5 +5,5 @@
 mysqlclient-1.4.6-cp39-cp39-win_amd64.whl
 
 #Cache
-upevdcp/__pycache__/*
-users/__pycache__/*
+__pycache__/
+**/__pycache__

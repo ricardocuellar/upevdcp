@@ -7,14 +7,14 @@ class ETP(models.Model):
 
     ORIGINALIDAD = 'Originalidad'
     ESTILOS = 'Estilos'
-    DISEÑO = 'Diseño'
+    DISENO = 'Diseño'
     PROCESO = 'Proceso'
     TERMINADO = 'Terminado'
 
     ESTADO_CHOICES = [
         (ORIGINALIDAD , 'Originalidad'),
         (ESTILOS , 'Estilos'),
-        (DISEÑO , 'Diseño'),
+        (DISENO , 'Diseño'),
         (PROCESO , 'Proceso'),
         (TERMINADO , 'Terminado'),
     ]

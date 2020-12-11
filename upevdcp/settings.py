@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'carreras',
     'materias',
     'etps',
+    'equipos',
 ]
 
 MIDDLEWARE = [

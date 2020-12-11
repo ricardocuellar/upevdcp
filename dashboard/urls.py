@@ -17,6 +17,16 @@ urlpatterns = [
         name='dashboard'
         ),
     path(
+        route='crear-etp',
+        view=views.etpCrear,
+        name='etpCrear'
+    ),
+    path(
+        route='etp-en-proceso',
+        view=views.etpProceso,
+        name='etpProceso'
+    ),
+    path(
         route='admin',
         view = views.test_admin,
         name='admin'

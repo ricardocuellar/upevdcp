@@ -27,6 +27,25 @@ def DashboardTemplate(request):
             return render(request, 'evaluadorUPEV/dashboardEvaluador.html')
 
 
+
+#ETP (Evaluación técnico pedagogica)
+
+@login_required(redirect_field_name=None)
+@uteycv_required
+def etpCrear(request):
+    """Crear ETP"""
+    
+    pass
+
+
+@login_required(redirect_field_name=None)
+@admin_required
+def etpProceso(request):
+    pass
+
+
+
+
 @login_required(redirect_field_name=None)
 @admin_required
 def test_admin(request):

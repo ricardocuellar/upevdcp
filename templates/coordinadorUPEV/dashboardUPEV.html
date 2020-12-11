@@ -6,12 +6,15 @@
 
 {% block menu_options %}
 
-    <a href="#" class="list-group-item list-group-item-action bg-light">Inicio</a>
+    <a href="{% url "dashboard:dashboard" %}" class="list-group-item list-group-item-action bg-light">Inicio</a>
     <a href="#" class="list-group-item list-group-item-action bg-light">ETP en proceso</a>
     <a href="#" class="list-group-item list-group-item-action bg-light">Solicitudes de ETP</a>
     <a href="#" class="list-group-item list-group-item-action bg-light">Validar ETP</a>
     <a href="#" class="list-group-item list-group-item-action bg-light">Gestionar evaluadores</a>
-    <a href="#" class="list-group-item list-group-item-action bg-light">Ver historial</a>
+    <a href="#" class="list-group-item list-group-item-action bg-light">Ver historial ETPs</a>
+    <a href="#" class="list-group-item list-group-item-action bg-light">Ver Unidades de Aprendizaje en Linea</a>
+    <a href="#" class="list-group-item list-group-item-action bg-light">Ver Unidades Academicas</a>
+
 
 
 {% endblock menu_options %}

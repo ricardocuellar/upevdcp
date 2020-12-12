@@ -34,6 +34,7 @@ class ETP(models.Model):
         default= '-'
         )
 
+    solicitud_aprobada = models.BooleanField()
     terminado = models.BooleanField()
 
 

@@ -6,20 +6,15 @@
 
 {% block menu_options %}
 
-    <a href="#" class="list-group-item list-group-item-action bg-light">Inicio</a>
-    <a href="#" class="list-group-item list-group-item-action bg-light">Tablero de actividades</a>
-    <a href="#" class="list-group-item list-group-item-action bg-light">Actividades pasadas</a>
+    <a href="{% url "dashboard:dashboard" %}" class="list-group-item list-group-item-action bg-light">Inicio</a>
+    <a href="{% url "dashboard:tableroActividades" %}" class="list-group-item list-group-item-action bg-light">Tablero de actividades</a>
+    <a href="{% url "dashboard:pasadasActividades" %}" class="list-group-item list-group-item-action bg-light">Actividades pasadas</a>
 
 
 {% endblock menu_options %}
 
 {# Container del dashboard#}
 {% block container %}
-
-    <div>
-    {% include "evaluadorUPEV/tareasPendientes.html" %}
-    </div>
-
 
 
 {% endblock %}

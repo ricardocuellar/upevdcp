@@ -32,6 +32,17 @@ urlpatterns = [
         view=views.etpSolicitudes,
         name='etpSolicitudes'
     ),
+    #Evaluador UPEV
+    path(
+        route='tablero-actividades',
+        view=views.tableroActividades,
+        name='tableroActividades'
+    ),
+    path(
+        route='actividades-pasadas',
+        view=views.pasadasActividades,
+        name='pasadasActividades'
+    ),
     path(
         route='admin',
         view = views.test_admin,

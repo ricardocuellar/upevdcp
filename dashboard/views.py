@@ -24,7 +24,7 @@ def DashboardTemplate(request):
         elif rol == "admin":
             return render(request, 'coordinadorUPEV/dashboardUPEV.html')
         elif rol == "evaluador":
-            return render(request, 'evaluadorUPEV/dashboardEvaluador.html')
+            return render(request, 'evaluadorUPEV/home.html')
 
 
 
@@ -52,7 +52,25 @@ def etpSolicitudes(request):
     return render(request, 'coordinadorUTEyCV/solicitudesETP.html')
 
 
+# Actividades (Evaluadores)
 
+@login_required(redirect_field_name=None)
+@evaluador_required
+def tableroActividades(request):
+    """Tablero de actividades"""
+    return render(request, 'evaluadorUPEV/tableroActividades.html')
+
+
+@login_required(redirect_field_name=None)
+@evaluador_required
+def pasadasActividades(request):
+    """Actividades pasadas"""
+    return render(request, 'evaluadorUPEV/actividadesPasadas.html')
+
+
+
+
+# Test
 
 @login_required(redirect_field_name=None)
 @admin_required

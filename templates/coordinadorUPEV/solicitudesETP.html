@@ -1,13 +1,23 @@
+{%extends "coordinadorUPEV/dashboardUPEV.html" %}
 
-<h2>Solicitudes de ETP</h2>
+
+{# Container del dashboard#}
+{% block container %}
+
+<h2>Solicitudes pendientes para ETP</h2>
 <table class="table table-striped">
     <thead>
       <tr>
-        <th scope="col">UAL</th>
         <th scope="col">ID</th>
-        <th scope="col">UTEyCV</th>
-        <th scope="col">Fecha solicitud</th>
-        <th scope="col">Solicitud</th>
+        <th scope="col">UPEV_ID</th>
+        <th scope="col">Oficio</th>
+        <th scope="col">Materia</th>
+        <th scope="col">Usuario plataforma</th>
+        <th scope="col">Password plataforma</th>
+        <th scope="col">Usuario plataforma</th>
+        <th scope="col">Revisión</th>
+
+
       </tr>
     </thead>
     <tbody>
@@ -35,5 +45,8 @@
   </table>
 
   <hr>
+
+{% endblock %}
+
 
   

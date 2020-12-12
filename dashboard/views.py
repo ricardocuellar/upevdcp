@@ -22,10 +22,37 @@ def DashboardTemplate(request):
         if rol == "uteycv":
             return render(request, 'coordinadorUTEyCV/home.html')
         elif rol == "admin":
-            return render(request, 'coordinadorUPEV/dashboardUPEV.html')
+            return render(request, 'coordinadorUPEV/home.html')
         elif rol == "evaluador":
             return render(request, 'evaluadorUPEV/home.html')
 
+
+#Admin dashboard
+@login_required(redirect_field_name=None)
+@admin_required
+def procesoETPs(request):
+    return render(request, 'coordinadorUPEV/procesoETP.html')
+
+@login_required(redirect_field_name=None)
+@admin_required
+def solicitudesETP(request):
+    return render(request, 'coordinadorUPEV/solicitudesETP.html')
+
+@login_required(redirect_field_name=None)
+@admin_required
+def validarETP(request):
+    return render(request, 'coordinadorUPEV/validarETP.html')
+
+
+@login_required(redirect_field_name=None)
+@admin_required
+def historialETP(request):
+    return render(request, 'coordinadorUPEV/historial.html')
+
+@login_required(redirect_field_name=None)
+@admin_required
+def crearEquipos(request):
+    return render(request, 'coordinadorUPEV/crearEquipos.html')
 
 
 #ETP (Evaluación técnico pedagogica) (UTEyCV)

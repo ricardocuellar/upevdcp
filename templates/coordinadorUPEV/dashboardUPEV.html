@@ -7,26 +7,17 @@
 {% block menu_options %}
 
     <a href="{% url "dashboard:dashboard" %}" class="list-group-item list-group-item-action bg-light">Inicio</a>
-    <a href="#" class="list-group-item list-group-item-action bg-light">ETP en proceso</a>
-    <a href="#" class="list-group-item list-group-item-action bg-light">Solicitudes de ETP</a>
-    <a href="#" class="list-group-item list-group-item-action bg-light">Validar ETP</a>
-    <a href="#" class="list-group-item list-group-item-action bg-light">Gestionar evaluadores</a>
-    <a href="#" class="list-group-item list-group-item-action bg-light">Ver historial ETPs</a>
-    <a href="#" class="list-group-item list-group-item-action bg-light">Ver Unidades de Aprendizaje en Linea</a>
-    <a href="#" class="list-group-item list-group-item-action bg-light">Ver Unidades Academicas</a>
-
+    <a href="{% url "dashboard:procesoETPs" %}" class="list-group-item list-group-item-action bg-light">Ver solicitudes de ETP</a>
+    <a href="{% url "dashboard:solicitudesETP" %}" class="list-group-item list-group-item-action bg-light">Validar ETP</a>
+    <a href="{% url "dashboard:validarETP" %}" class="list-group-item list-group-item-action bg-light">Ver historial ETPs</a>
+    <a href="{% url "dashboard:historialETP" %}" class="list-group-item list-group-item-action bg-light">ETPs en proceso</a>
+    <a href="{% url "dashboard:crearEquipos" %}" class="list-group-item list-group-item-action bg-light">Crear equipos</a>
+ 
 
 
 {% endblock menu_options %}
 
 {# Container del dashboard#}
 {% block container %}
-
-    <div>
-    {% include "coordinadorUPEV/solicitudesETP.html" %}
-    </div>
-
-
-
 
 {% endblock %}

@@ -1,14 +1,18 @@
 
-<p>Gestionar ETP</p>
+{%extends "coordinadorUPEV/dashboardUPEV.html" %}
+
+
+{# Container del dashboard#}
+{% block container %}
 
 <h2>Validar ETP</h2>
 <table class="table table-striped">
     <thead>
       <tr>
-        <th scope="col">UAL</th>
         <th scope="col">ID</th>
-        <th scope="col">UTEyCV</th>
-        <th scope="col">Fecha de solicitud</th>
+        <th scope="col">UPEV_ID</th>
+        <th scope="col">Materia</th>
+        <th scope="col">Unidad Academica</th>
         <th scope="col">Estado</th>
       </tr>
     </thead>
@@ -37,5 +41,10 @@
   </table>
 
   <hr>
+
+
+{% endblock %}
+
+
 
   

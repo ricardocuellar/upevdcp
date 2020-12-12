@@ -1,7 +1,11 @@
 
-<p>Gestionar ETP</p>
+{%extends "coordinadorUPEV/dashboardUPEV.html" %}
 
-<h2>ETP en proceso</h2>
+
+{# Container del dashboard#}
+{% block container %}
+
+<h2>ETP que estan siendo evaluadas</h2>
 <table class="table table-striped">
     <thead>
       <tr>
@@ -37,5 +41,8 @@
   </table>
 
   <hr>
+
+{% endblock %}
+
 
   

@@ -16,6 +16,33 @@ urlpatterns = [
         #view= views.DashboardView.as_view(),
         name='dashboard'
         ),
+    #Administrador dashboard
+    path(
+        route='etps-en-proceso',
+        view= views.procesoETPs,
+        name= 'procesoETPs'
+    ),
+    path(
+        route='solicitudes-etp',
+        view= views.solicitudesETP,
+        name= 'solicitudesETP'
+    ),
+    path(
+        route='validar-etp',
+        view= views.validarETP,
+        name= 'validarETP'
+    ),
+    path(
+        route='ver-historial-etps',
+        view= views.historialETP,
+        name= 'historialETP'
+    ),
+    path(
+        route='crear-equipos',
+        view= views.crearEquipos,
+        name= 'crearEquipos'
+    ),
+
     #ETP
     path(
         route='crear-etp',

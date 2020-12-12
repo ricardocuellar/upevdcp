@@ -3,9 +3,14 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import  ListView, TemplateView
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from django.views.generic import CreateView
+from django.urls import reverse_lazy
 
+#Forms 
+from dashboard.forms import ETPForm
 #Models
 from users.models import UsersRole
+from materias.models import Materia
 from dashboard.decorators import admin_required, uteycv_required, evaluador_required
 
 
@@ -57,13 +62,26 @@ def crearEquipos(request):
 
 #ETP (Evaluación técnico pedagogica) (UTEyCV)
 
-@login_required(redirect_field_name=None)
-@uteycv_required
-def etpCrear(request):
-    """Crear ETP"""
-    return render(request, 'coordinadorUTEyCV/crearETP.html')
+# @login_required(redirect_field_name=None)
+
+# def etpCrear(request):
+#     """Crear ETP"""
+#     return render(request, 'coordinadorUTEyCV/crearETP.html')
 
 
+class etpCrear(LoginRequiredMixin,CreateView):
+    """Return create view"""
+    template_name = 'coordinadorUTEyCV/crearETP.html'
+    form_class = ETPForm
+    success_url = reverse_lazy('dashboard:etpProceso')
+
+    def get_context_data(self, **kwargs):
+        """Add user and profile data to context"""
+        context = super().get_context_data(**kwargs)
+        context['user'] = self.request.user
+        context['usersrole'] = self.request.user.usersrole
+        context['materias'] = Materia.objects.all()
+        return context
 
 @login_required(redirect_field_name=None)
 @uteycv_required

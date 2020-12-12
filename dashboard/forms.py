@@ -11,7 +11,7 @@ class ETPForm(forms.ModelForm):
     """Post model form"""
     class Meta: 
         """Form settigns"""
-        model = Post
-        fields = ('materia', 'profile', 'title', 'photo')
+        model = ETP
+        fields = ('oficio','materia','usuario_plataforma','password_plataforma')
 
 

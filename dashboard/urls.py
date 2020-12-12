@@ -46,7 +46,7 @@ urlpatterns = [
     #ETP
     path(
         route='crear-etp',
-        view=views.etpCrear,
+        view=views.etpCrear.as_view(),
         name='etpCrear'
     ),
     path(

@@ -20,7 +20,7 @@ def DashboardTemplate(request):
         user_id = request.user.pk
         rol = UsersRole.objects.get(user_id=user_id).role 
         if rol == "uteycv":
-            return render(request, 'coordinadorUTEyCV/dashboardUTEyCV.html')
+            return render(request, 'coordinadorUTEyCV/home.html')
         elif rol == "admin":
             return render(request, 'coordinadorUPEV/dashboardUPEV.html')
         elif rol == "evaluador":
@@ -28,20 +28,28 @@ def DashboardTemplate(request):
 
 
 
-#ETP (Evaluación técnico pedagogica)
+#ETP (Evaluación técnico pedagogica) (UTEyCV)
 
 @login_required(redirect_field_name=None)
 @uteycv_required
 def etpCrear(request):
     """Crear ETP"""
-    
-    pass
+    return render(request, 'coordinadorUTEyCV/crearETP.html')
+
 
 
 @login_required(redirect_field_name=None)
-@admin_required
+@uteycv_required
 def etpProceso(request):
-    pass
+    """Ver procesos de ETPs"""
+    return render(request, 'coordinadorUTEyCV/procesoETP.html')
+
+
+@login_required(redirect_field_name=None)
+@uteycv_required
+def etpSolicitudes(request):
+    """Ver procesos de ETPs"""
+    return render(request, 'coordinadorUTEyCV/solicitudesETP.html')
 
 
 

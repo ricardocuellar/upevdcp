@@ -24,7 +24,7 @@ def uteycv_required(function):
     def is_uteycv(request):
         user_id = request.pk
         rol = UsersRole.objects.get(user_id=user_id).role 
-        return rol  == "uteycv"
+        return rol  == "uteycv" or rol =="admin"
     actual_decorator = user_passes_test(is_uteycv)
     if function:
         return actual_decorator(function)

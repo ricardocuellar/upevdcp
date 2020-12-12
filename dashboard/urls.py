@@ -16,6 +16,7 @@ urlpatterns = [
         #view= views.DashboardView.as_view(),
         name='dashboard'
         ),
+    #ETP
     path(
         route='crear-etp',
         view=views.etpCrear,
@@ -25,6 +26,11 @@ urlpatterns = [
         route='etp-en-proceso',
         view=views.etpProceso,
         name='etpProceso'
+    ),
+    path(
+        route='solicitudes-etp',
+        view=views.etpSolicitudes,
+        name='etpSolicitudes'
     ),
     path(
         route='admin',

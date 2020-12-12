@@ -1,5 +1,10 @@
-x
-<p>ETP Solicitadas</p>
+
+{%extends "coordinadorUTEyCV/dashboardUTEyCV.html" %}
+
+
+{# Container del dashboard#}
+{% block container %}
+<p>ETP Solicitadas en proceso</p>
 
 <h2>ETP en proceso</h2>
 <table class="table table-striped">
@@ -34,6 +39,8 @@ x
       </tr>
     </tbody>
   </table>
+
+  {% endblock %}x
 
 
 

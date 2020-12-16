@@ -5,12 +5,13 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
-
+from django.http import HttpResponseRedirect
 #Forms 
 from dashboard.forms import ETPForm
 #Models
 from users.models import UsersRole
 from materias.models import Materia
+from etps.models import ETP
 from dashboard.decorators import admin_required, uteycv_required, evaluador_required
 
 
@@ -72,6 +73,7 @@ def crearEquipos(request):
 class etpCrear(LoginRequiredMixin,CreateView):
     """Return create view"""
     template_name = 'coordinadorUTEyCV/crearETP.html'
+    model=ETP
     form_class = ETPForm
     success_url = reverse_lazy('dashboard:etpProceso')
 
@@ -79,9 +81,13 @@ class etpCrear(LoginRequiredMixin,CreateView):
         """Add user and profile data to context"""
         context = super().get_context_data(**kwargs)
         context['user'] = self.request.user
-        context['usersrole'] = self.request.user.usersrole
         context['materias'] = Materia.objects.all()
         return context
+
+    def form_valid(self,form):
+        self.object = form.save()
+        return HttpResponseRedirect(self.get_success_url())
+
 
 @login_required(redirect_field_name=None)
 @uteycv_required

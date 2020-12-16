@@ -21,21 +21,21 @@ class ETP(models.Model):
 
     oficio = models.IntegerField()
     materia = models.OneToOneField(Materia, on_delete=models.CASCADE)
-    id_upev = models.IntegerField()
+    id_upev = models.IntegerField(default=0)
     usuario_plataforma = models.CharField(max_length=70)
     password_plataforma = models.CharField(max_length=70)
-    revision = models.PositiveSmallIntegerField()
+    revision = models.PositiveSmallIntegerField(default=0)
 
     estado = models.CharField(
         max_length=20,
         choices=ESTADO_CHOICES,
         blank=True,
         null=True,
-        default= '-'
+        default= 'Proceso'
         )
 
-    solicitud_aprobada = models.BooleanField()
-    terminado = models.BooleanField()
+    solicitud_aprobada = models.BooleanField(default=0)
+    terminado = models.BooleanField(default=0)
 
 
     created = models.DateTimeField(auto_now_add=True)

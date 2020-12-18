@@ -4,6 +4,8 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+#Models 
+from unidadAcademica.models import UnidadAcademica
 
 # Create your models here.
 
@@ -32,6 +34,8 @@ class UsersRole(models.Model):
         null=True,
         default= PERSONALUPEV
         )
+
+    unidad_academica = models.OneToOneField(UnidadAcademica, on_delete=models.CASCADE, blank=True, null=True)
 
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)

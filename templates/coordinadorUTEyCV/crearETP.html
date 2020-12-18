@@ -1,8 +1,4 @@
-{%extends "coordinadorUTEyCV/dashboardUTEyCV.html" %}
-
-
-{# Container del dashboard#}
-{% block container %}
+{%extends "coordinadorUTEyCV/dashboardUTEyCV.html" %} {# Container del dashboard#} {% block container %}
 
 <h1>Crear ETP</h1>
 
@@ -14,61 +10,44 @@
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
 
-                <input type="hidden" name="user" value="{{ user.pk}}" />
-
-                {# Website field #}
+                <input type="hidden" name="user" value="{{ user.pk}}" /> {# Website field #}
                 <div class="form-group">
-                    <input
-                        class="form-control {% if form.oficio.errors %}is-invalid{% endif %}"
-                        type="number"
-                        name="oficio"
-                        placeholder="Oficio"
-                    >
+                    <input class="form-control {% if form.oficio.errors %}is-invalid{% endif %}" type="number" name="oficio" placeholder="Oficio">
                     <div class="invalid-feedback">
                         {% for error in form.oficio.errors %}{{ error }}{% endfor %}
                     </div>
                 </div>
 
                 <div class="form-group">
-                         
-                    
+
+
                     <label for="materia">Materia</label>
-                    <select  class="form-control" name="materia" id="materia">
+                    <select class="form-control" name="materia" id="materia">
                        {% for materia in materias  %}
                         <option value="{{materia.pk}}">{{materia}}</option>
                         {% endfor %} 
                         
                     </select>
                     <div class="invalid-feedback">
-                        {% for error in form.materia.errors %}{{ error }}{% endfor %} 
+                        {% for error in form.materia.errors %}{{ error }}{% endfor %}
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <input
-                        class="form-control {% if form.usuario_plataforma.errors %}is-invalid{% endif %}"
-                        type="text"
-                        name="usuario_plataforma"
-                        placeholder="usuario_plataforma"
-                    >
+                    <input class="form-control {% if form.usuario_plataforma.errors %}is-invalid{% endif %}" type="text" name="usuario_plataforma" placeholder="usuario_plataforma">
                     <div class="invalid-feedback">
                         {% for error in form.usuario_plataforma.errors %}{{ error }}{% endfor %}
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <input
-                        class="form-control {% if form.password_plataforma.errors %}is-invalid{% endif %}"
-                        type="text"
-                        name="password_plataforma"
-                        placeholder="password_plataforma"
-                    >
+                    <input class="form-control {% if form.password_plataforma.errors %}is-invalid{% endif %}" type="text" name="password_plataforma" placeholder="password_plataforma">
                     <div class="invalid-feedback">
                         {% for error in form.password_plataforma.errors %}{{ error }}{% endfor %}
                     </div>
                 </div>
 
-               
+
 
                 <input type="submit" class="btn btn-primary btn-block mt-5" value="Enviar">
             </form>

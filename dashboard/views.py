@@ -93,6 +93,7 @@ class etpCrear(LoginRequiredMixin,CreateView):
 @uteycv_required
 def etpProceso(request):
     """Ver procesos de ETPs"""
+    
     return render(request, 'coordinadorUTEyCV/procesoETP.html')
 
 

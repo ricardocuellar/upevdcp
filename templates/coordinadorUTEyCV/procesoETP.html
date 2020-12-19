@@ -1,51 +1,13 @@
-
-{%extends "coordinadorUTEyCV/dashboardUTEyCV.html" %}
-
-
-{# Container del dashboard#}
-{% block container %}
+ {%extends "coordinadorUTEyCV/dashboardUTEyCV.html" %} {# Container del dashboard#} {% block container %}
 <p>ETP Solicitadas en proceso</p>
 
 <h2>ETP en proceso</h2>
-<table class="table table-striped">
-  {{request.user.pk}}
-    <thead>
-      <tr>
-        <th scope="col">UAL</th>
-        <th scope="col">ID</th>
-        <th scope="col">Fecha inicio</th>
-        <th scope="col">Estado</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>Originalidad</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-        <td>Espera de correcciones</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-      </tr>
-    </tbody>
-  </table>
 
-  {% endblock %}x
+<p>Aquí van las ETP ya aceptadas</p>
+
+{% endblock %}x
 
 
 
 
-  <hr>
-
-  
+<hr>

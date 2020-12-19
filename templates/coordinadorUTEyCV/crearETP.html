@@ -9,8 +9,8 @@
 
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-
                 <input type="hidden" name="user" value="{{ user.pk}}" /> {# Website field #}
+
                 <div class="form-group">
                     <input class="form-control {% if form.oficio.errors %}is-invalid{% endif %}" type="number" name="oficio" placeholder="Oficio">
                     <div class="invalid-feedback">
@@ -46,6 +46,9 @@
                         {% for error in form.password_plataforma.errors %}{{ error }}{% endfor %}
                     </div>
                 </div>
+
+                <input type="hidden" name="solicitante" value="{{ user.pk}}" />
+
 
 
 

@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from materias.models import Materia
 
 # Create your models here.
@@ -37,6 +38,6 @@ class ETP(models.Model):
     solicitud_aprobada = models.BooleanField(default=0)
     terminado = models.BooleanField(default=0)
 
-
+    solicitante =  models.ForeignKey(User, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)

@@ -55,7 +55,7 @@ urlpatterns = [
         name='etpProceso'
     ),
     path(
-        route='solicitudes-etp',
+        route='solicitudes-etp-uteycv',
         view=views.etpSolicitudes,
         name='etpSolicitudes'
     ),

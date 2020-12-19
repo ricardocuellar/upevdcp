@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'materias',
     'etps',
     'equipos',
+    'dashboard'
 ]
 
 MIDDLEWARE = [

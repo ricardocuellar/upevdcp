@@ -75,7 +75,7 @@ class etpCrear(LoginRequiredMixin,CreateView):
     template_name = 'coordinadorUTEyCV/crearETP.html'
     model=ETP
     form_class = ETPForm
-    success_url = reverse_lazy('dashboard:etpProceso')
+    success_url = reverse_lazy('dashboard:etpSolicitudes')
 
     def get_context_data(self, **kwargs):
         """Add user and profile data to context"""
@@ -101,7 +101,10 @@ def etpProceso(request):
 @uteycv_required
 def etpSolicitudes(request):
     """Ver procesos de ETPs"""
-    return render(request, 'coordinadorUTEyCV/solicitudesETP.html')
+    user = request.user.pk
+    etps = ETP.objects.filter(solicitante_id = user)
+    context = {'etps':etps}
+    return render(request, 'coordinadorUTEyCV/solicitudesETP.html',context)
 
 
 # Actividades (Evaluadores)

@@ -6,13 +6,17 @@ from django.http import HttpResponse
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
+
 #Forms 
 from dashboard.forms import ETPForm
 #Models
 from users.models import UsersRole
 from materias.models import Materia
 from etps.models import ETP
+from carreras.models import Carrera
+from unidadAcademica.models import UnidadAcademica
 from dashboard.decorators import admin_required, uteycv_required, evaluador_required
+
 
 
 # Create your views here.
@@ -37,17 +41,32 @@ def DashboardTemplate(request):
 @login_required(redirect_field_name=None)
 @admin_required
 def procesoETPs(request):
-    return render(request, 'coordinadorUPEV/procesoETP.html')
+    etps = ETP.objects.filter(solicitud_aprobada=1)
+    contex = {'etps': etps}
+    return render(request, 'coordinadorUPEV/procesoETP.html',contex)
 
 @login_required(redirect_field_name=None)
 @admin_required
-def solicitudesETP(request):
-    return render(request, 'coordinadorUPEV/solicitudesETP.html')
+def solicitudesETP(request, escuela=None):
+    if request.method == 'POST':
+        if request.POST['solicitud'] == 'validar':
+            etp = ETP.objects.get(pk=request.POST['user'])
+            etp.solicitud_aprobada = 1
+            etp.save()
+    
+    etps = ETP.objects.filter(solicitud_aprobada=0)
+    materias = Materia.objects.all()
+    
+    
+    contex = {'etps': etps, 'materia':materias,}
+    return render(request, 'coordinadorUPEV/solicitudesETP.html',contex)
 
 @login_required(redirect_field_name=None)
 @admin_required
 def validarETP(request):
-    return render(request, 'coordinadorUPEV/validarETP.html')
+    etps = ETP.objects.filter(solicitud_aprobada=1)
+    contex = {'etps': etps}
+    return render(request, 'coordinadorUPEV/validarETP.html',contex)
 
 
 @login_required(redirect_field_name=None)
@@ -59,6 +78,7 @@ def historialETP(request):
 @admin_required
 def crearEquipos(request):
     return render(request, 'coordinadorUPEV/crearEquipos.html')
+
 
 
 #ETP (Evaluación técnico pedagogica) (UTEyCV)

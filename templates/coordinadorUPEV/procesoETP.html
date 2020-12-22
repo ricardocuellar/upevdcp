@@ -9,38 +9,37 @@
 <table class="table table-striped">
     <thead>
       <tr>
+        <th scope="col">Oficio</th>
         <th scope="col">UAL</th>
-        <th scope="col">ID</th>
         <th scope="col">Fecha inicio</th>
         <th scope="col">Equipo</th>
         <th scope="col">Estado</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>Originalidad</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-        <td>Espera de correcciones</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-      </tr>
+      {% for etp in etps  %}  
+      
+      {% if etp.solicitud_aprobada == 1 %}
+        
+
+        <tr>
+          <td scope="row">{{etp.oficio}}</td>
+          <td>{{etp.materia}}</td>
+          <td>{{etp.created}}</td>
+          <td>Aquí va el equipo</td>
+          <td>{{etp.estado}}</td>
+        </tr>
+
+      {% endif %}
+
+      {% endfor %}
+
     </tbody>
   </table>
 
   <hr>
+
+
 
 {% endblock %}
 

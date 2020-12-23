@@ -26,7 +26,12 @@
           <td scope="row">{{etp.oficio}}</td>
           <td>{{etp.materia}}</td>
           <td>{{etp.created}}</td>
-          <td>Aquí va el equipo</td>
+          
+          {% if etp.equipo == '' %}
+              <td>Sin equipo asignado</td>
+          {% else %}
+              <td>{{etp.equipo.id}}</td>
+          {% endif %}
           <td>{{etp.estado}}</td>
         </tr>
 

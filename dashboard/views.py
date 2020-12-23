@@ -173,7 +173,24 @@ def etpSolicitudes(request):
 @evaluador_required
 def tableroActividades(request):
     """Tablero de actividades"""
-    return render(request, 'evaluadorUPEV/tableroActividades.html')
+    etps = ETP.objects.filter(revision=0).filter(solicitud_aprobada=1)
+    user_id = request.user.pk
+    role = request.user.usersrole.evaluador
+    equipo = Equipo.objects
+    if role == 'originalidad':
+        equipo_member_id = equipo.filter(evaluador_originalidad_id=user_id)
+    elif role == 'pedagogo':
+        equipo_member_id = equipo.filter(evaluador_pedagogo_id=user_id)
+    elif role == 'comunicologo':
+        equipo_member_id = equipo.filter(evaluador_comunicologo_id=user_id)
+    elif role == 'estilos':
+        equipo_member_id = equipo.filter(evaluador_estilos_id=user_id)
+
+    # equipo = []
+    # for etp in etps:
+    #     equipo.append(etp.estado)
+    context = {'etps':etps,'rol': role, 'equipo_member':equipo_member_id,'equipo':equipo}
+    return render(request, 'evaluadorUPEV/tableroActividades.html', context)
 
 
 @login_required(redirect_field_name=None)

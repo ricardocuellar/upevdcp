@@ -14,13 +14,28 @@
       </tr>
     </thead>
     <tbody>
+          
+      {% for equipo in equipo_member  %}
+            
       <tr>
-        <th scope="row">Card</th>
+        <th style="width: 120px;">
+          <div class="card " style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">{{equipo.id_etp.materia}}</h5>
+              <p>Oficio: <strong>{{equipo.id_etp.oficio}}</strong></p>
+              <p>Equipo: <strong>{{equipo.id}}</strong></p>
+              <p class="card-text">Tienes esta tarea asignada, para iniciar selecciona aceptar</p>
+              <a href="#" class="card-link">Aceptar</a>
+            </div>
+          </div>
+        </th>
         <td></td>
         <td></td>
         <td>@</td>
         <td></td>
       </tr>
+
+      {% endfor %}
     </tbody>
   </table>
 

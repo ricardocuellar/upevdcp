@@ -38,8 +38,13 @@ urlpatterns = [
         name= 'historialETP'
     ),
     path(
+        route='ver-equipos',
+        view= views.verEquipos,
+        name= 'verEquipos'
+    ),
+    path(
         route='crear-equipos',
-        view= views.crearEquipos,
+        view= views.crearEquipos.as_view(),
         name= 'crearEquipos'
     ),
 

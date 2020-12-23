@@ -4,17 +4,20 @@ from django.views.generic import  ListView, TemplateView
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.views.generic import CreateView
+#from extra_views import CreateWithInlinesView, InlineFormSet
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
+from django.contrib.auth.models import User 
 
 #Forms 
-from dashboard.forms import ETPForm
+from dashboard.forms import ETPForm, EquipoForm
 #Models
 from users.models import UsersRole
 from materias.models import Materia
 from etps.models import ETP
 from carreras.models import Carrera
 from unidadAcademica.models import UnidadAcademica
+from equipos.models import Equipo
 from dashboard.decorators import admin_required, uteycv_required, evaluador_required
 
 
@@ -74,10 +77,47 @@ def validarETP(request):
 def historialETP(request):
     return render(request, 'coordinadorUPEV/historial.html')
 
+
 @login_required(redirect_field_name=None)
 @admin_required
-def crearEquipos(request):
-    return render(request, 'coordinadorUPEV/crearEquipos.html')
+def verEquipos(request):
+    equipos = Equipo.objects.all()
+    context = {'equipos':equipos}
+    return render(request, 'coordinadorUPEV/verEquipos.html',context)
+
+
+
+#@login_required(redirect_field_name=None)
+#@admin_required
+class crearEquipos(LoginRequiredMixin,CreateView):
+    template_name = 'coordinadorUPEV/crearEquipos.html'
+    model= Equipo
+    form_class = EquipoForm
+    success_url = reverse_lazy('dashboard:verEquipos')
+
+    def get_context_data(self, **kwargs):
+        """Add user and profile data to context"""
+        context = super().get_context_data(**kwargs)
+        context['user'] = self.request.user
+        context['evaluadores'] = UsersRole.objects.filter(role="evaluador").filter(disponible=1)
+        context['etps'] = ETP.objects.filter(solicitud_aprobada=0)
+        
+        return context
+
+    def form_valid(self,form):
+        cleaned_data = form.cleaned_data
+        evaluadores_data = [cleaned_data['evaluador_originalidad'].pk,cleaned_data['evaluador_estilos'].pk,cleaned_data['evaluador_pedagogo'].pk,cleaned_data['evaluador_comunicologo'].pk]
+        idx = 0
+        while(idx < 4):
+            user_evaluador = UsersRole.objects.get(user_id=evaluadores_data[idx])
+            user_evaluador.disponible = 0
+            user_evaluador.save()
+            idx+=1
+
+        self.object = form.save()
+
+        return HttpResponseRedirect(self.get_success_url())
+   
 
 
 

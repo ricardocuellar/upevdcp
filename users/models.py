@@ -27,6 +27,21 @@ class UsersRole(models.Model):
         (PERSONALUPEV, 'PersonalUPEV')
     ]
 
+    #Evaluadores positions
+    ORIGINALIDAD = 'originalidad'
+    ESTILOS = 'estilos'
+    PEDAGOGO = 'pedagogo'
+    COMUNICOLOGO = 'comunicologo'
+    NINGUNO = 'ninguno'
+
+    EVALUADORES_CHOICES = [
+        (ORIGINALIDAD , 'Originalidad'),
+        (ESTILOS , 'Estilos'),
+        (PEDAGOGO , 'Pedagogo'),
+        (COMUNICOLOGO , 'Comunicologo'),
+        (NINGUNO, 'Ninguno')
+    ]
+
     role = models.CharField(
         max_length=9,
         choices=ROLE_CHOICES,
@@ -34,8 +49,18 @@ class UsersRole(models.Model):
         null=True,
         default= PERSONALUPEV
         )
+    
+    evaluador = models.CharField(
+        max_length=12,
+        choices=EVALUADORES_CHOICES,
+        blank=True,
+        null=True,
+        default= NINGUNO
+    )
 
     unidad_academica = models.OneToOneField(UnidadAcademica, on_delete=models.CASCADE, blank=True, null=True)
+
+    disponible = models.BooleanField(default=0)
 
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)

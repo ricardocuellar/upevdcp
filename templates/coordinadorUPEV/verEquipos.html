@@ -1,0 +1,43 @@
+{%extends "coordinadorUPEV/dashboardUPEV.html" %}
+
+
+{# Container del dashboard#}
+{% block container %}
+
+<h2>Ver equipos de trabajo</h2>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">ID Equipo</th>
+        <th scope="col">Evaluador Originalidad</th>
+        <th scope="col">Pedagogo</th>
+        <th scope="col">Comunicologo</th>
+        <th scope="col">Corrector de Estilos</th>
+        <th scope="col">Evaluando la ETP</th>
+    </tr>
+    </thead>
+    <tbody>
+      {% for equipo in equipos  %}  
+      
+        <tr>
+          <td scope="row">{{equipo.pk}}</td>
+          <td>{{equipo.id_equipo}}</td>
+          <td>{{equipo.evaluador_originalidad}}</td>
+          <td>{{equipo.evaluador_pedagogo}}</td>
+          <td>{{equipo.evaluador_comunicologo}}</td>
+          <td>{{equipo.evaluador_estilos}}</td>
+          <td>{{equipo.id_etp.oficio}}</td>
+          <td></td>
+        </tr>
+
+      {% endfor %}
+
+    </tbody>
+  </table>
+
+  <hr>
+
+
+
+{% endblock %}

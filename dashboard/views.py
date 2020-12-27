@@ -19,6 +19,7 @@ from carreras.models import Carrera
 from unidadAcademica.models import UnidadAcademica
 from equipos.models import Equipo
 from dashboard.decorators import admin_required, uteycv_required, evaluador_required
+from tareas.models import Tarea
 
 
 
@@ -107,11 +108,18 @@ class crearEquipos(LoginRequiredMixin,CreateView):
     def form_valid(self,form):
         cleaned_data = form.cleaned_data
         evaluadores_data = [cleaned_data['evaluador_originalidad'].pk,cleaned_data['evaluador_estilos'].pk,cleaned_data['evaluador_pedagogo'].pk,cleaned_data['evaluador_comunicologo'].pk]
+        id_etp = cleaned_data['id_etp'].pk
         idx = 0
         while(idx < 4):
             user_evaluador = UsersRole.objects.get(user_id=evaluadores_data[idx])
             user_evaluador.disponible = 0
             user_evaluador.save()
+
+            user_tareas = Tarea()
+            user_tareas.estado_tarea = 'Pendientes'
+            user_tareas.user_tasks_id = evaluadores_data[idx]
+            user_tareas.etp_task_id = id_etp
+            user_tareas.save()
             idx+=1
 
         self.object = form.save()
@@ -176,7 +184,10 @@ def tableroActividades(request):
     etps = ETP.objects.filter(revision=0).filter(solicitud_aprobada=1)
     user_id = request.user.pk
     role = request.user.usersrole.evaluador
+    tareas = Tarea.objects.get(user_tasks_id=user_id)
     equipo = Equipo.objects
+    
+    #todo meter aqui los solicitantes_id
     if role == 'originalidad':
         equipo_member_id = equipo.filter(evaluador_originalidad_id=user_id)
     elif role == 'pedagogo':
@@ -189,7 +200,7 @@ def tableroActividades(request):
     # equipo = []
     # for etp in etps:
     #     equipo.append(etp.estado)
-    context = {'etps':etps,'rol': role, 'equipo_member':equipo_member_id,'equipo':equipo}
+    context = {'etps':etps,'rol': role, 'equipo_member':equipo_member_id,'equipo':equipo,'tareas':tareas,'user_id':user_id}
     return render(request, 'evaluadorUPEV/tableroActividades.html', context)
 
 

@@ -90,6 +90,11 @@ urlpatterns = [
         view = views.test_evaluador,
         name='evaluador'
     ),
+    path(
+        route='cambiarEstadoETP',
+        view= views.cambiarEstadoETP,
+        name='cambiarEstadoETP'
+    )
     
 
 ]

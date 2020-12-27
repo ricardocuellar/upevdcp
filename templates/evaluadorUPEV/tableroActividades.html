@@ -27,7 +27,14 @@
                 <p>Oficio: <strong>{{etp.oficio}}</strong></p>
                 <p>Equipo: <strong>{{etp.equipo.id}}</strong></p>
                 <p class="card-text">Tienes esta tarea asignada, para iniciar selecciona aceptar</p>
-                <a href="#" class="card-link">Aceptar</a>
+                <form method="POST" action="{% url "dashboard:tableroActividades" %}" enctype="multipart/form-data" id="validation_etp">
+                  {% csrf_token %}
+                  <input type="hidden" name="etp" value="{{ etp.id}}" />
+                  <input type="hidden" name="user" value="{{user_id}}">
+                  <input type="hidden" name="solicitud" value="validar">
+                  <input type="button" class="btn btn-info" value="Aceptar" id="aceptar_etp">
+                </form>
+                
               </div>
             </div>
           </td>
@@ -42,8 +49,21 @@
                 <h5 class="card-title">{{etp.materia}}</h5>
                 <p>Oficio: <strong>{{etp.oficio}}</strong></p>
                 <p>Equipo: <strong>{{etp.equipo.id}}</strong></p>
-                <p class="card-text">Tienes esta tarea asignada, para iniciar selecciona aceptar</p>
-                <a href="#" class="card-link">Aceptar</a>
+                <p class="card-text">Estás realizando esta tarea, en cuando estés listo podrás pasarla a hecho o si encuentras alguna incidencia reportarla.</p>
+                <form method="POST" action="{% url "dashboard:tableroActividades" %}" enctype="multipart/form-data" id="terminada_etp">
+                  {% csrf_token %}
+                  <input type="hidden" name="etp" value="{{ etp.id}}" />
+                  <input type="hidden" name="user" value="{{user_id}}">
+                  <input type="hidden" name="solicitud" value="terminar">
+                  <input type="button" class="mb-3 btn btn-info" value="Terminar tarea" id="terminar_etp">
+                </form>
+                <form method="POST" action="{% url "dashboard:tableroActividades" %}" enctype="multipart/form-data" id="revision_etp">
+                  {% csrf_token %}
+                  <input type="hidden" name="etp" value="{{ etp.id}}" />
+                  <input type="hidden" name="user" value="{{user_id}}">
+                  <input type="hidden" name="solicitud" value="revisar">
+                  <input type="button" class="mb-3 btn btn-danger" value="Reportar correcciones" id="revisar_etp">
+                </form>
               </div>
             </div>
           </td>
@@ -61,6 +81,7 @@
                 <p>Equipo: <strong>{{etp.equipo.id}}</strong></p>
                 <p class="card-text">Tienes esta tarea asignada, para iniciar selecciona aceptar</p>
                 <a href="#" class="card-link">Aceptar</a>
+                <a href="#" class="card-link">Reportar correcciones</a>
               </div>
             </div>
           </td>
@@ -92,6 +113,79 @@
     </tbody>
   </table>
 
+
+  <script>
+    if(document.querySelector('#aceptar_etp') != null){
+    document.querySelector('#aceptar_etp').addEventListener('click', function(e){
+      e.preventDefault();
+      Swal.fire({
+        title: '¿Seguro que quieres continuar con la solicitud?',
+        text: "Está acción no se puede revertir",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, aceptar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Aceptado',
+            'Avanzaste en la tarea del ETP, se notificará a los coordinadores. Gracias',
+            'success'
+          );
+          document.querySelector("#validation_etp").submit();  
+        }
+      })
+    });
+    }
+
+
+    document.querySelector('#terminar_etp').addEventListener('click', function(e){
+      e.preventDefault();
+      Swal.fire({
+        title: '¿Seguro que quieres dar por terminado tu proceso de evaluación?',
+        text: "Está acción no se puede revertir",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, aceptar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Aceptado',
+            'Haz terminado tu proceso de evaluación. Muchas gracias.',
+            'success'
+          );
+          document.querySelector("#terminada_etp").submit();  
+        }
+      })
+    });
+
+
+    document.querySelector('#revisar_etp').addEventListener('click', function(e){
+      e.preventDefault();
+      Swal.fire({
+        title: 'Mandarás la ETP a revisión ¿Estás seguro?',
+        text: "Está acción no se puede revertir",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, aceptar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Aceptado',
+            'Se han mandado las observaciones correspondientes al coordinador.',
+            'success'
+          );
+          document.querySelector("#revision_etp").submit();  
+        }
+      })
+    });
+
+  </script>
 
 
 {% endblock %}

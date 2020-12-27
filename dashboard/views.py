@@ -183,6 +183,34 @@ def etpSolicitudes(request):
 @evaluador_required
 def tableroActividades(request):
     """Tablero de actividades"""
+
+    if request.method == 'POST':
+        if request.POST['solicitud'] == 'validar':
+            tareas = Tarea.objects.get(user_tasks_id=request.POST['user'])
+            user_id = UsersRole.objects.get(user_id=request.POST['user'])
+            etp = ETP.objects.get(pk=request.POST['etp'])     
+            tareas.estado_tarea = 'Haciendo'
+            if user_id.evaluador == 'originalidad':
+                etp.estado = 'Originalidad'
+            elif user_id.evaluador == 'pedagogo':
+                etp.estado = 'Pedagógico'
+            elif user_id.evaluador == 'comunicologo':
+                etp.estado = 'Comunicación'
+            elif user_id.evaluador == 'estilos':
+                etp.estado = 'Estilos'
+            tareas.save()    
+            etp.save()
+        elif request.POST['solicitud'] == 'revisar':
+            tareas = Tarea.objects.get(user_tasks_id=request.POST['user'])
+            etp = ETP.objects.get(pk=request.POST['etp']) 
+            tareas.estado_tarea = 'Espera'
+            etp.estado = 'Espera'
+            tareas.save()
+            etp.save()
+
+        elif request.POST['solicitud'] == 'terminar':
+            pass
+
     etps = ETP.objects.filter(revision=0).filter(solicitud_aprobada=1)
     user_id = request.user.pk
     role = request.user.usersrole.evaluador
@@ -211,6 +239,16 @@ def tableroActividades(request):
 def pasadasActividades(request):
     """Actividades pasadas"""
     return render(request, 'evaluadorUPEV/actividadesPasadas.html')
+
+
+@login_required(redirect_field_name=None)
+@evaluador_required
+def cambiarEstadoETP(request):
+    """Cambiar estado"""
+    
+    
+    
+    return redirect('evaluadorUPEV/tableroActividades.html')
 
 
 

@@ -7,16 +7,20 @@ class ETP(models.Model):
     """ETP Model"""
 
     ORIGINALIDAD = 'Originalidad'
+    PEDAGOGICO = 'Pedagógico'
+    COMUNICACION = 'Comunicación'
     ESTILOS = 'Estilos'
-    DISENO = 'Diseño'
+    TECNICOS = 'Técnicos'
     PROCESO = 'Proceso'
     ESPERA = 'Espera'
     TERMINADO = 'Terminado'
 
     ESTADO_CHOICES = [
         (ORIGINALIDAD , 'Originalidad'),
+        (PEDAGOGICO , 'Pedagógico'),
+        (COMUNICACION , 'Comunicación'),
         (ESTILOS , 'Estilos'),
-        (DISENO , 'Diseño'),
+        (TECNICOS , 'Técnicos'),
         (PROCESO , 'Proceso'),
         (ESPERA , 'Espera'),
         (TERMINADO , 'Terminado'),

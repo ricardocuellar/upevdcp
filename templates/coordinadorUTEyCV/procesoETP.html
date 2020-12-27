@@ -5,7 +5,89 @@
 
 <p>Aquí van las ETP ya aceptadas</p>
 
-{% endblock %}x
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Solicitudes</th>
+        <th scope="col">Iniciadas</th>
+        <th scope="col">En espera</th>
+        <th scope="col">Terminadas</th>
+      </tr>
+    </thead>
+    <tbody>        
+        {% for etp in etps  %}
+        <tr>        
+            {% if etp.estado == 'Proceso'  %}
+              <td style="width: 120px;">
+                <div class="card " style="width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">{{etp.materia}}</h5>
+                    <p>Oficio: <strong>{{etp.oficio}}</strong></p>
+                    <p>Equipo: <strong>{{etp.equipo.id}}</strong></p>
+                    <p class="card-text">Esta tarea aún no se ha iniciado.</p>
+                  </div>
+                </div>
+              </td>
+            {% else %}
+              <td></td>
+            {% endif %}
+            
+
+            {% if etp.estado != 'Proceso' and etp.estado != 'Espera'  %}
+              <td style="width: 120px;">
+                <div class="card " style="width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">{{etp.materia}}</h5>
+                    <p>Oficio: <strong>{{etp.oficio}}</strong></p>
+                    <p>Equipo: <strong>{{etp.equipo.id}}</strong></p>
+                    <p class="card-text">Esta tarea aún no se ha iniciado.</p>
+                  </div>
+                </div>
+              </td>
+            {% else %}
+              <td></td>
+            {% endif %}
+            
+            {% if etp.estado == 'Espera'  %}
+              <td style="width: 120px;">
+                <div class="card " style="width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">{{etp.materia}}</h5>
+                    <p>Oficio: <strong>{{etp.oficio}}</strong></p>
+                    <p>Equipo: <strong>{{etp.equipo.id}}</strong></p>
+                    <p class="card-text">Esta tarea aún no se ha iniciado.</p>
+                  </div>
+                </div>
+              </td>
+            {% else %}
+              <td></td>
+            {% endif %}
+
+
+            {% if etp.estado == 'Terminado'  %}
+              <td style="width: 120px;">
+                <div class="card " style="width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">{{etp.materia}}</h5>
+                    <p>Oficio: <strong>{{etp.oficio}}</strong></p>
+                    <p>Equipo: <strong>{{etp.equipo.id}}</strong></p>
+                    <p class="card-text">Esta tarea aún no se ha iniciado.</p>
+                  </div>
+                </div>
+              </td>
+            {% else %}
+              <td></td>
+            {% endif %}
+            
+        </tr>
+        {% endfor %}
+            
+
+    </tbody>
+</table>
+
+
+{% endblock %}
 
 
 

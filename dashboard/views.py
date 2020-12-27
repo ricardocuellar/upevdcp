@@ -161,8 +161,10 @@ class etpCrear(LoginRequiredMixin,CreateView):
 @uteycv_required
 def etpProceso(request):
     """Ver procesos de ETPs"""
-    
-    return render(request, 'coordinadorUTEyCV/procesoETP.html')
+    user = request.user.pk
+    etps = ETP.objects.filter(solicitante_id = user)
+    context = {'etps':etps}
+    return render(request, 'coordinadorUTEyCV/procesoETP.html', context)
 
 
 @login_required(redirect_field_name=None)

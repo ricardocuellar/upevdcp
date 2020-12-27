@@ -10,6 +10,7 @@ class ETP(models.Model):
     ESTILOS = 'Estilos'
     DISENO = 'Diseño'
     PROCESO = 'Proceso'
+    ESPERA = 'Espera'
     TERMINADO = 'Terminado'
 
     ESTADO_CHOICES = [
@@ -17,6 +18,7 @@ class ETP(models.Model):
         (ESTILOS , 'Estilos'),
         (DISENO , 'Diseño'),
         (PROCESO , 'Proceso'),
+        (ESPERA , 'Espera'),
         (TERMINADO , 'Terminado'),
     ]
 

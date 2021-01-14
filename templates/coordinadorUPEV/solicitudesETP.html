@@ -17,6 +17,7 @@
         <th scope="col">Materia</th>
         <th scope="col">Unidad Academica</th>
         <th scope="col">Solicitante</th>
+        <th scope="col">Solicitud</th>
         <th scope="col">Aceptar solicitud</th>
 
 
@@ -35,8 +36,9 @@
           <td>{{etp.password_plataforma}}</td>
           <td>{{etp.created}}</td>
           <td>{{etp.materia}}</td>
-          <td>Unidad</td>
+          <td>ESCA Sto</td>
           <td>{{etp.solicitante}}</td>
+          <td><a href="{{ etp.documento.url }}">Descargar solicitud</a></td>
           <form method="POST" action="{% url "dashboard:solicitudesETP" %}" enctype="multipart/form-data" id="validation_etp">
             {% csrf_token %}
             <input type="hidden" name="user" value="{{ etp.id}}" />

@@ -7,7 +7,31 @@
         <div class="col-6 pt-3 pb-3" id="profile-box">
             <h4 class="mb-4">Crear una ETP</h4>
 
-            <form method="POST" enctype="multipart/form-data">
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+
+            {% load crispy_forms_tags %}
+
+            <div class="container">
+                <h2>New form</h2>
+                <form method="post" enctype="multipart/form-data" action="">
+                {% csrf_token %}
+                {{form|crispy}}
+                {{form.solicitante.as_hidden}}
+                <input type="hidden" name="solicitante" value="{{ user.pk}}" />
+                <button type="submit" class="btn btn-primary">Crear ETP</button>
+                </form>
+            </div>
+
+
+
+            <!-- <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <input type="hidden" name="user" value="{{ user.pk}}" /> {# Website field #}
 
@@ -47,16 +71,28 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <label for="">Subir formato de evaluación:</label>
+                    <input class="form-control {% if form.documento.errors %}is-invalid{% endif %}" type="file" name="documento" >
+                    <div class="invalid-feedback">
+                        {% for error in form.documento.errors %}{{ error }}{% endfor %}
+                    </div>
+                </div>
+
                 <input type="hidden" name="solicitante" value="{{ user.pk}}" />
 
 
 
 
                 <input type="submit" class="btn btn-primary btn-block mt-5" value="Enviar">
-            </form>
+            </form> -->
         </div>
     </div>
+
+
+
 </div>
+
 
 
 

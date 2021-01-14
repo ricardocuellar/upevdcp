@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    #external
+    'crispy_forms',
     #Local apps
     'users',
     'unidadAcademica',
@@ -49,6 +51,8 @@ INSTALLED_APPS = [
     'dashboard',
     'tareas',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -120,7 +124,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-es'
 
 TIME_ZONE = 'UTC'
 
@@ -139,6 +143,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static')
 ]
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
@@ -149,3 +156,6 @@ STATICFILES_FINDERS = [
 LOGIN_URL= 'users:login'
 LOGIN_REDIRECT_URL = '/dashboard'
 LOGOUT_REDIRECT_URL = LOGIN_URL
+
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'

@@ -8,7 +8,8 @@ from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User 
-
+from django.core.files.storage import FileSystemStorage
+from django.contrib import messages
 #Forms 
 from dashboard.forms import ETPForm, EquipoForm
 #Models
@@ -132,29 +133,64 @@ class crearEquipos(LoginRequiredMixin,CreateView):
 #ETP (Evaluación técnico pedagogica) (UTEyCV)
 
 # @login_required(redirect_field_name=None)
-
 # def etpCrear(request):
-#     """Crear ETP"""
-#     return render(request, 'coordinadorUTEyCV/crearETP.html')
+#      """Crear ETP"""
+#      context = {}
+#      if request.method == 'POST':
+#          uploaded_file = request.FILES['documento']
+#          print(uploaded_file.name)
+#          fs = FileSystemStorage()
+#          name = fs.save(uploaded_file.name, uploaded_file)
+#          url = fs.url(name)
+#          context['url'] = fs.url(name)
+#      return render(request, 'coordinadorUTEyCV/crearETP.html', context)
+    
 
+def etpCrear(request):
+    if request.method == 'POST':
+        form = ETPForm(request.POST, request.FILES)
+        if form.is_valid():
+            user = User.objects.get(id= request.POST['solicitante'])
+            print(request.POST['solicitante'])
+            form.instance.solicitante = user
+            form.save()
+            messages.success(request, 'ETP Creada correctamente')
+            return render(request, 'coordinadorUTEyCV/crearETP.html')
+        
+    else:
+        form = ETPForm()
+    return render(request, 'coordinadorUTEyCV/crearETP.html',{
+        'form': form
+    })
 
-class etpCrear(LoginRequiredMixin,CreateView):
-    """Return create view"""
-    template_name = 'coordinadorUTEyCV/crearETP.html'
-    model=ETP
-    form_class = ETPForm
-    success_url = reverse_lazy('dashboard:etpSolicitudes')
+# class etpCrear(LoginRequiredMixin,CreateView):
+#     """Return create view"""
+#     template_name = 'coordinadorUTEyCV/crearETP.html'
+#     model=ETP
+#     form_class = ETPForm
+#     success_url = reverse_lazy('dashboard:etpSolicitudes')
 
-    def get_context_data(self, **kwargs):
-        """Add user and profile data to context"""
-        context = super().get_context_data(**kwargs)
-        context['user'] = self.request.user
-        context['materias'] = Materia.objects.all()
-        return context
+    
 
-    def form_valid(self,form):
-        self.object = form.save()
-        return HttpResponseRedirect(self.get_success_url())
+#     def get_context_data(self, **kwargs):
+#         """Add user and profile data to context"""
+#         context = super().get_context_data(**kwargs)
+#         context['user'] = self.request.user
+#         context['materias'] = Materia.objects.all()
+#         return context
+
+#     def upload(self,request):
+#         if request.method == 'POST':
+#             uploaded_file = request.FILES['documento']
+#             print('nombre:' + uploaded_file.name)
+
+#     def form_valid(self,form):
+#         cleaned_data = form.cleaned_data
+#         print(cleaned_data)
+#         file = [cleaned_data['documento']]
+#         print(file)
+#         self.object = form.save()
+#         return HttpResponseRedirect(self.get_success_url())
 
 
 @login_required(redirect_field_name=None)

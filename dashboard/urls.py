@@ -4,6 +4,7 @@
 from django.urls import path
 from django.views.generic import TemplateView
 
+
 # Views 
 from dashboard import views
 
@@ -51,7 +52,7 @@ urlpatterns = [
     #ETP
     path(
         route='crear-etp',
-        view=views.etpCrear.as_view(),
+        view=views.etpCrear,
         name='etpCrear'
     ),
     path(
@@ -98,3 +99,5 @@ urlpatterns = [
     
 
 ]
+
+

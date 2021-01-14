@@ -49,3 +49,22 @@ body{
 }
 
 
+/*UPEV Dashboard*/
+.upev-dashboard-menu .row{
+    margin: 50px;
+    display: flex;
+    justify-content: center;
+    
+}
+
+
+
+.upev-dashboard-menu .row .col{
+    padding: 80px;
+    margin: 10px;
+    border: 2px solid black;
+    color: black;
+    text-align: center;
+    background-color: #e6e6e6;
+}
+

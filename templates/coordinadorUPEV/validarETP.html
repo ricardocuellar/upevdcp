@@ -9,33 +9,28 @@
 <table class="table table-striped">
     <thead>
       <tr>
-        <th scope="col">ID</th>
-        <th scope="col">UPEV_ID</th>
+
+        <th scope="col">Oficio</th>
         <th scope="col">Materia</th>
         <th scope="col">Unidad Academica</th>
-        <th scope="col">Estado</th>
+        <th scope="col">Última actualización</th>
+        <th scope="col">Ver última versión correcciones</th>
+        <th scope="col">Validar evaluación</th>
       </tr>
     </thead>
     <tbody>
       
-      {% for etp in etps  %}  
-      
-      {% if etp.solicitud_aprobada == 0 %}
-        
+
         <tr>
-          <th scope="row">{{etp.id}}</th>
-          <td>{{etp.oficio}}</td>
-          <td>{{etp.usuario_plataforma}}</td>
-          <td>{{etp.password_plataforma}}</td>
-          <td>{{etp.created}}</td>
-          <td>{{etp.materia}}</td>
-          <td>{{carrera}}</td>
+          <td scope="row">599</td>
+          <td>Álgebra Lineal</td>
+          <td>ESCOM</td>
+          <td>20 de Diciembre de 2020 a las 23:54</td>
+          <td><a href="">Descargar</a></td>
+          <td><a class="btn btn-info"  href="">Aprobar ETP</a></td>
           <td>{{etp.solicitante}}</td>
         </tr>
 
-      {% endif %}
-
-      {% endfor %}
 
     </tbody>
   </table>

@@ -13,7 +13,8 @@ class ETPForm(forms.ModelForm):
     class Meta: 
         """Form settigns"""
         model = ETP
-        fields = ('oficio','materia','usuario_plataforma','password_plataforma','solicitante')
+        fields = ('oficio','materia','usuario_plataforma','password_plataforma','solicitante','documento')
+        exclude = ['solicitante']
 
 
 

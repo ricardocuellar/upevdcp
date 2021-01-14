@@ -45,5 +45,6 @@ class ETP(models.Model):
     terminado = models.BooleanField(default=0)
 
     solicitante =  models.ForeignKey(User, on_delete=models.CASCADE)
+    documento = models.FileField(upload_to='solicitudes/etp/')
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)

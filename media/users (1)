@@ -1,0 +1,88 @@
+-- phpMyAdmin SQL Dump
+-- version 5.0.2
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 12-01-2021 a las 06:29:40
+-- Versión del servidor: 5.7.32-log
+-- Versión de PHP: 7.4.10
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `ariashow`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `users`
+--
+
+CREATE TABLE `users` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `role` enum('admin','alumno','user') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'user',
+  `pago` decimal(8,2) NOT NULL DEFAULT '0.00',
+  `imagepago` bigint(20) UNSIGNED NOT NULL DEFAULT '1',
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role`, `pago`, `imagepago`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Ricardo Cuéllar', 'rcuellarsn@gmail.com', '2021-01-09 02:45:26', '$2y$10$cYoqfd6W/j2ucTlD.pnIHO5Vrt.Pk7wSP.RIZZDVDhjw47BnK4tD2', 'admin', '0.00', 0, NULL, '2021-01-09 02:45:26', '2021-01-09 02:45:26'),
+(2, 'Salem Alumno', 'salem@test.com', '2021-01-09 02:45:26', '$2y$10$qjFldzjrDQxJnL0V.mtN5OLokDZf68sYUvmY8r3QYC6C3owVN7BqS', 'alumno', '2000.00', 0, NULL, '2021-01-09 02:45:26', '2021-01-09 02:53:34'),
+(3, 'Malva negra', 'malva@test.com', '2021-01-09 02:45:26', '$2y$10$yBAlIXwJEaYwIYPgriIRveANR4Dph2ybT6m4mKnv5FruOOtJWToE6', 'user', '0.00', 0, NULL, '2021-01-09 02:45:26', '2021-01-09 02:45:26'),
+(4, 'Brenda Dominguez', 'brenda@test.com', '2021-01-09 02:45:26', '$2y$10$.X61eYzLGHTaKdCdjSHFHOQfRucTA1PuPBfs0nhryNvrwxqxKyqiW', 'user', '0.00', 0, NULL, '2021-01-09 02:45:26', '2021-01-09 02:45:26'),
+(5, 'Nino Danonino', 'nino@test.com', '2021-01-09 02:45:26', '$2y$10$lyLS1d2NFtq2cwpGSgEk/.jgBK8fKR.qM1xoCuNSihNZsmn111XqC', 'user', '0.00', 0, NULL, '2021-01-09 02:45:26', '2021-01-09 02:45:26'),
+(6, 'Ricardo Test', 'rcuellars0111@gmail.com', '2021-01-10 01:07:00', '$2y$10$22ZCQ0iLpTqJ1.NZ2yLV0eE/cKyGFEg2n5lMPO.bLplapvqDe8r7W', 'alumno', '2000.00', 1, NULL, '2021-01-10 01:06:24', '2021-01-12 02:06:28'),
+(7, 'Ricardo Test Entropy', 'ricardo@entropy.tech', NULL, '$2y$10$hn.B1SN0il7j4u7mzDFqseSl2mpNS2sdOyra/ZRO.stRnQ8c9S1Wq', 'user', '0.00', 1, NULL, '2021-01-11 04:01:36', '2021-01-11 04:01:36'),
+(8, 'Isaac Test', 'isaac@ariashowcursos.com', '2021-01-12 05:28:16', '$2y$10$x6f8BEhzqbY4wwOdVAa0weW1IOel3D5QJz6YRX0ycAtxulIB006He', 'user', '0.00', 0, NULL, '2021-01-12 05:28:16', '2021-01-12 05:28:16'),
+(9, 'Edgar Test', 'edgar@ariashowcursos.com', '2021-01-12 05:28:16', '$2y$10$sU4hKndu6E8hxDjrQQ.ehuqBBQovP809eO/wu/TbasHqWtUxWRNBS', 'user', '0.00', 0, NULL, '2021-01-12 05:28:16', '2021-01-12 05:28:16'),
+(10, 'Osvaldo Test', 'osvaldo@ariashowcursos.com', '2021-01-12 05:28:16', '$2y$10$P6K10EQl4R8TCaZQp.W5uuC8B8DPIExzWTGE9c7fuBwAC8lxkVb9q', 'user', '0.00', 0, NULL, '2021-01-12 05:28:16', '2021-01-12 05:28:16'),
+(11, 'Vale Test', 'vale@ariashowcursos.com', '2021-01-12 05:28:16', '$2y$10$MDcL7YsLGguaZ.syhwOpNO124o1XvEaQje92N/lxXWisS1AmmaLI.', 'user', '0.00', 0, NULL, '2021-01-12 05:28:16', '2021-01-12 05:28:16'),
+(12, 'Aurora Test', 'aurora@ariashowcursos.com', '2021-01-12 05:28:16', '$2y$10$PiRvKBCLdVjkQciJq9Ogc.BBPlz2hL3TNGBGijoiJOAt2VWzzkF0m', 'user', '0.00', 0, NULL, '2021-01-12 05:28:16', '2021-01-12 05:28:16'),
+(13, 'Aneri Test', 'aneri@ariashowcursos.com', '2021-01-12 05:28:16', '$2y$10$SNll9xjmAYdz42J6SdX6nOwDaXFWgb.NU99TMBZVKl2QKxUcR7efm', 'user', '0.00', 0, NULL, '2021-01-12 05:28:16', '2021-01-12 05:28:16');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`),
+  ADD KEY `imagen` (`imagepago`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -102,7 +102,7 @@ class crearEquipos(LoginRequiredMixin,CreateView):
         context = super().get_context_data(**kwargs)
         context['user'] = self.request.user
         context['evaluadores'] = UsersRole.objects.filter(role="evaluador").filter(disponible=1)
-        context['etps'] = ETP.objects.filter(solicitud_aprobada=0)
+        context['etps'] = ETP.objects.filter(solicitud_aprobada=1)
         
         return context
 
@@ -113,7 +113,7 @@ class crearEquipos(LoginRequiredMixin,CreateView):
         idx = 0
         while(idx < 4):
             user_evaluador = UsersRole.objects.get(user_id=evaluadores_data[idx])
-            user_evaluador.disponible = 0
+            user_evaluador.disponible = 1
             user_evaluador.save()
 
             user_tareas = Tarea()
@@ -222,7 +222,8 @@ def tableroActividades(request):
 
     if request.method == 'POST':
         if request.POST['solicitud'] == 'validar':
-            tareas = Tarea.objects.get(user_tasks_id=request.POST['user'])
+            tareas = Tarea.objects.filter(user_tasks_id=request.POST['user']).get(etp_task_id=request.POST['etp'])
+            print(tareas)
             user_id = UsersRole.objects.get(user_id=request.POST['user'])
             etp = ETP.objects.get(pk=request.POST['etp'])     
             tareas.estado_tarea = 'Haciendo'
@@ -250,7 +251,8 @@ def tableroActividades(request):
     etps = ETP.objects.filter(revision=0).filter(solicitud_aprobada=1)
     user_id = request.user.pk
     role = request.user.usersrole.evaluador
-    tareas = Tarea.objects.get(user_tasks_id=user_id)
+    tareas = Tarea.objects.filter(user_tasks_id=user_id)
+    print(tareas)
     equipo = Equipo.objects
     
     #todo meter aqui los solicitantes_id

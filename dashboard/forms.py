@@ -23,5 +23,5 @@ class EquipoForm(forms.ModelForm):
     class Meta:
         """Form settings"""
         model = Equipo
-        fields = ('id_equipo','evaluador_originalidad','evaluador_estilos','evaluador_pedagogo','evaluador_comunicologo','id_etp')
+        fields = ('evaluador_originalidad','evaluador_estilos','evaluador_pedagogo','evaluador_comunicologo','id_etp')
 

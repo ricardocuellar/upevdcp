@@ -18,6 +18,8 @@ from django.urls import path, include
 from django.shortcuts import render, redirect
 from django.conf import settings
 from django.conf.urls.static import static
+from comentarios.views import home,verComentario,upload_file_view, upload_image_view
+from django.views.decorators.csrf import csrf_exempt
 
 
 from django.http import HttpResponse
@@ -38,6 +40,13 @@ urlpatterns = [
     #Dashboard
     path('dashboard/',include(('dashboard.urls','dashboard'), namespace = 'dashboard')),
 
+    #Uploads
+    path('fileUPload/',csrf_exempt(upload_file_view)),
+    path('imageUPload/',csrf_exempt(upload_image_view)),
+
+    #Comentarios
+    path('editorComentarios/',home),
+    path('comentario/<int:comentarioID>/',verComentario),
 
 ]
 

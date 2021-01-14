@@ -1,0 +1,12 @@
+
+<style>
+    .hidden{
+        display: none;
+    }
+</style>
+<form method='POST' action="">
+    {%csrf_token%}
+    {{form.media}}
+    {{form.as_p}}
+    <button type="submit" class="btn btn-info">Guardar</button>
+</form>

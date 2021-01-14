@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     #external
     'crispy_forms',
+    'django_editorjs',
     #Local apps
     'users',
     'unidadAcademica',
@@ -50,6 +51,7 @@ INSTALLED_APPS = [
     'equipos',
     'dashboard',
     'tareas',
+    'comentarios',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

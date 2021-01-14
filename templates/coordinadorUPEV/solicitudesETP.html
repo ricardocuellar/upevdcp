@@ -39,13 +39,50 @@
           <td>ESCA Sto</td>
           <td>{{etp.solicitante}}</td>
           <td><a href="{{ etp.documento.url }}">Descargar solicitud</a></td>
-          <form method="POST" action="{% url "dashboard:solicitudesETP" %}" enctype="multipart/form-data" id="validation_etp">
+          <form method="POST" action="{% url "dashboard:solicitudesETP" %}" enctype="multipart/form-data" id="validation_etp{{etp.id}}">
             {% csrf_token %}
             <input type="hidden" name="user" value="{{ etp.id}}" />
             <input type="hidden" name="solicitud" value="validar">
-            <td><input type="button" class="btn btn-info" value="Aceptar" id="aceptar_etp"></td>
+            <td><input type="button" class="btn btn-info" value="Aceptar" id="aceptar_etp{{etp.id}}"></td>
           </form>
         </tr>
+
+
+        <script>
+          document.getElementById('aceptar_etp{{etp.id}}').addEventListener('click', function(e){
+            e.preventDefault();
+      
+      
+          
+            Swal.fire({
+              title: '¿Seguro que quieres aceptar la solicitud?',
+              text: "Está acción no se puede revertir",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Sí, aceptar'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                Swal.fire(
+                  'Aceptado',
+                  'La ETP se ha agregado exitosamente',
+                  'success'
+                );
+      
+                document.querySelector("#validation_etp{{etp.id}}").submit();
+                
+              }
+            })
+      
+          });
+      
+      
+          
+      
+      
+        </script>
+
 
       {% endif %}
 
@@ -58,40 +95,7 @@
 
   <hr>
 
-  <script>
-    document.querySelector('#aceptar_etp').addEventListener('click', function(e){
-      e.preventDefault();
-
-
-    
-      Swal.fire({
-        title: '¿Seguro que quieres aceptar la solicitud?',
-        text: "Está acción no se puede revertir",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Sí, aceptar'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire(
-            'Aceptado',
-            'La ETP se ha agregado exitosamente',
-            'success'
-          );
-
-          document.querySelector("#validation_etp").submit();
-          
-        }
-      })
-
-    });
-
-
-    
-
-
-  </script>
+  
 
 {% endblock %}
 

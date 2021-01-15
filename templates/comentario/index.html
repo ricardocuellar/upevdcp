@@ -16,5 +16,10 @@
     <input type="hidden" name="evaluador" value="{{ user.pk}}" />
     <input type="hidden" name="etp" value="{{ tarea.etp_task.id}}" />
     <input type="hidden" name="solicitud" value="revisar">
-    <button type="submit" class="btn btn-info">Guardar</button>
+    
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-info">Enviar correcciones</button>
+      </div>
 </form>

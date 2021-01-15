@@ -1,13 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comentario</title>
-</head>
-<body>
-    
-    <h1>Hola gato</h1>
+
+{%extends "dashboard/base.html" %}
+
+{% block head_content %}
+<title>DEV | Dashboard UPEV</title>
+{% endblock head_content %}
+
+
+{# Container del dashboard#}
+{% block container %}
 
     
     <div id="comentario-post"></div>
@@ -89,5 +89,4 @@
     </script>
 
 
-</body>
-</html>
+{% endblock %}

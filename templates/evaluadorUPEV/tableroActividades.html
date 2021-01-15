@@ -86,16 +86,7 @@
                     <div class="modal-body">
                       {% include "comentario/index.html" %}
                     </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                      <form method="POST" action="{% url "dashboard:tableroActividades" %}" enctype="multipart/form-data" id="revision_etp">
-                        {% csrf_token %}
-                        <input type="hidden" name="etp" value="{{ tarea.etp_task.id}}" />
-                        <input type="hidden" name="user" value="{{user_id}}">
-                        <input type="hidden" name="solicitud" value="revisar">
-                        <input type="button" class="btn btn-danger" value="Enviar correcciones" id="revisar_etp">
-                      </form>
-                    </div>
+                    
                   </div>
                 </div>
               </div>
@@ -116,9 +107,14 @@
                       <h5 class="card-title">{{tarea.etp_task.materia}}</h5>
                       <p>Oficio: <strong>{{tarea.etp_task.oficio}}</strong></p>
                       <p>Equipo: <strong>{{tarea.etp_task.equipo.id}}</strong></p>
-                      <p class="card-text">Tienes esta tarea asignada, para iniciar selecciona aceptar</p>
-                      <a href="#" class="card-link">Aceptar</a>
-                      <a href="#" class="card-link">Reportar correcciones</a>
+                      <p class="card-text">Tarea en espera de que se atiendan las correcciones indicadas.</p>
+                      
+                      {% if tarea.etp_task.pendientes == 1 %} 
+                      <p class="bg-light">En espera de correcciones</p>
+                      {% else %}
+                      <a href="#" class="btn btn-info" >Reanudar evaluación</a>
+                      {% endif %}
+                      <a href="" class="btn btn-info">Ver observaciones</a>
                     </div>
                   </div>
                 </td>

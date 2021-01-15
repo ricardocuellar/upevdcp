@@ -30,3 +30,5 @@ class Comentario(models.Model):
     etp = models.ForeignKey(ETP, on_delete=models.CASCADE)
 
     evaluador =  models.ForeignKey(User, on_delete=models.CASCADE)  
+
+    revisado = models.BooleanField(default=0)

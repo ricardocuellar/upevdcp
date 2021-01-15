@@ -274,6 +274,7 @@ def tableroActividades(request):
             etp = ETP.objects.get(pk=request.POST['etp']) 
             tareas.estado_tarea = 'Espera'
             etp.estado = 'Espera'
+            etp.pendientes = 1
             tareas.save()
             etp.save()
             form=ComentarioForm(request.POST)

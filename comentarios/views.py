@@ -5,6 +5,7 @@ from django.http import JsonResponse
 from django.utils import timezone
 from comentarios.forms import ComentarioForm
 from comentarios.models import Comentario
+from etps.models import ETP
 # Create your views here.
 
 def home(request):
@@ -51,3 +52,10 @@ def upload_file_view(request):
     'file': 
     {'url':fileurl, "size": fs.size(file), "name": str(f), "extension": ext}
     })
+
+
+
+def verTablaComentarios(request,etpID):
+    comentarios = Comentario.objects.filter(etp_id=etpID)
+    etp = ETP.objects.get(id=etpID)
+    return render(request,'comentario/verTablaComentarios.html',{'comentarios':comentarios, 'etp':etp})

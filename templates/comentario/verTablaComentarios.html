@@ -1,0 +1,51 @@
+
+{%extends "dashboard/base.html" %}
+
+{% block head_content %}
+<title>DEV | Dashboard UPEV</title>
+{% endblock head_content %}
+
+
+{# Container del dashboard#}
+{% block container %}
+
+
+<h2>Tabla de comentarios: <strong>{{etp.materia}}</strong></h2>
+<p>Oficio: <strong>{{etp.oficio}}</strong></p>
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>idx</th>
+        <th scope="col">Evaluador</th>
+        <th scope="col">Ir a comentario</th>
+        <th scope="col">Corregido</th>
+    </thead>
+    <tbody>
+    
+        {% for comentario in comentarios  %}
+              
+                <tr>
+                    <td>{{comentario.index}}</td>
+                    <td>{{comentario.evaluador}}</td>
+                    <td><a href="/comentario/{{comentario.pk}}">Ver comentario</a></td>
+                    <td>
+                        {% if comentario.revisado == 1  %}
+                            <i class="fas fa-check"></i>
+                        {% else %}
+                            <i class="fas fa-times"></i>
+                        {% endif %}
+                            
+                    </td>
+                </tr>
+           
+            
+            
+        {% endfor %}
+      
+
+    </tbody>
+  </table>
+
+
+  {% endblock %}

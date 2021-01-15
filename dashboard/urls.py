@@ -5,7 +5,7 @@ from django.urls import path
 from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
-from comentarios.views import home,verComentario,upload_file_view, upload_image_view
+from comentarios.views import home,verComentario,upload_file_view, upload_image_view, verTablaComentarios
 from django.views.decorators.csrf import csrf_exempt
 # Views 
 from dashboard import views
@@ -106,8 +106,10 @@ urlpatterns = [
 
     #Comentarios
     path('editorComentarios/',home),
+    path('tablaComentarios/<int:etpID>/', verTablaComentarios),
     path('comentario/<int:comentarioID>/',verComentario),
 
+    
     
 
 ]

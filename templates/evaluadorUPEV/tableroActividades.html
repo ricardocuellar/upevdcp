@@ -56,12 +56,12 @@
                       <p>Oficio: <strong>{{tarea.etp_task.oficio}}</strong></p>
                       <p>Equipo: <strong>{{tarea.etp_task.equipo.id}}</strong></p>
                       <p class="card-text">Estás realizando esta tarea, en cuando estés listo podrás pasarla a hecho o si encuentras alguna incidencia reportarla.</p>
-                      <form method="POST" action="{% url "dashboard:tableroActividades" %}" enctype="multipart/form-data" id="terminada_etp">
+                      <form method="POST" action="{% url "dashboard:tableroActividades" %}" enctype="multipart/form-data" id="terminada_etp{{tarea.etp_task.id}}">
                         {% csrf_token %}
                         <input type="hidden" name="etp" value="{{ tarea.etp_task.id}}" />
                         <input type="hidden" name="user" value="{{user_id}}">
                         <input type="hidden" name="solicitud" value="terminar">
-                        <input type="button" class="mb-3 btn btn-info" value="Terminar tarea" id="terminar_etp">
+                        <input type="button" class="mb-3 btn btn-info" value="Terminar tarea" id="terminar_etp{{tarea.etp_task.id}}">
                       </form>
                       
                       <a href="#"  class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter{{tarea.etp_task.id}}">Reportar correcciones</a>
@@ -134,8 +134,8 @@
                       <h5 class="card-title">{{tarea.etp_task.materia}}</h5>
                       <p>Oficio: <strong>{{tarea.etp_task.oficio}}</strong></p>
                       <p>Equipo: <strong>{{tarea.etp_task.equipo.id}}</strong></p>
-                      <p class="card-text">Tienes esta tarea asignada, para iniciar selecciona aceptar</p>
-                      <a href="#" class="card-link">Aceptar</a>
+                      <p class="card-text">Haz terminado de evaluar esta tarea. Una vez verificada desaparecerá de tu tablero.</p>
+                      
                     </div>
                   </div>
                 </td>
@@ -178,7 +178,7 @@
               }
           
           
-              document.querySelector('#terminar_etp').addEventListener('click', function(e){
+              document.querySelector('#terminar_etp{{tarea.etp_task.id}}').addEventListener('click', function(e){
                 e.preventDefault();
                 Swal.fire({
                   title: '¿Seguro que quieres dar por terminado tu proceso de evaluación?',
@@ -195,7 +195,7 @@
                       'Haz terminado tu proceso de evaluación. Muchas gracias.',
                       'success'
                     );
-                    document.querySelector("#terminada_etp").submit();  
+                    document.querySelector("#terminada_etp{{tarea.etp_task.id}}").submit();  
                   }
                 })
               });

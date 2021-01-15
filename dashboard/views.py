@@ -285,7 +285,22 @@ def tableroActividades(request):
                 return redirect('/dashboard/tablero-actividades')
 
         elif request.POST['solicitud'] == 'terminar':
-            pass
+            tareas = Tarea.objects.filter(user_tasks_id=request.POST['user']).get(etp_task_id=request.POST['etp'])
+            tareas.estado_tarea = 'Hecho'
+            tareas.save()
+
+            etp = ETP.objects.get(pk=request.POST['etp']) 
+            if role == 'originalidad':
+                etp.estado = 'Pedagógico'
+            elif role == 'pedagogo':
+                etp.estado = 'Comunicación'
+            elif role == 'comunicologo':
+                etp.estado = 'Estilos'
+            elif role == 'estilos':
+                etp.estado = 'Terminado'
+            etp.save()
+
+            return redirect('/dashboard/tablero-actividades')
 
     # equipo = []
     # for etp in etps:

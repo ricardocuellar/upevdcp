@@ -4,9 +4,17 @@
         display: none;
     }
 </style>
+
+{% load crispy_forms_tags %}
 <form method='POST' action="">
     {%csrf_token%}
+
     {{form.media}}
     {{form.as_p}}
+    {{form.etp_id.as_hidden}}
+    {{form.evaluador_id.as_hidden}}
+    <input type="hidden" name="evaluador" value="{{ user.pk}}" />
+    <input type="hidden" name="etp" value="{{ tarea.etp_task.id}}" />
+    <input type="hidden" name="solicitud" value="revisar">
     <button type="submit" class="btn btn-info">Guardar</button>
 </form>

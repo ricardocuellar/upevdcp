@@ -3,8 +3,10 @@
 #Django
 from django.urls import path
 from django.views.generic import TemplateView
-
-
+from django.conf import settings
+from django.conf.urls.static import static
+from comentarios.views import home,verComentario,upload_file_view, upload_image_view
+from django.views.decorators.csrf import csrf_exempt
 # Views 
 from dashboard import views
 
@@ -95,9 +97,23 @@ urlpatterns = [
         route='cambiarEstadoETP',
         view= views.cambiarEstadoETP,
         name='cambiarEstadoETP'
-    )
+    ),
+
+
+     #Uploads
+    path('fileUPload/',csrf_exempt(upload_file_view)),
+    path('imageUPload/',csrf_exempt(upload_image_view)),
+
+    #Comentarios
+    path('editorComentarios/',home),
+    path('comentario/<int:comentarioID>/',verComentario),
+
     
 
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

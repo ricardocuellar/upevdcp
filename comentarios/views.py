@@ -43,9 +43,11 @@ def upload_file_view(request):
     f= request.FILES['file']
     fs = FileSystemStorage()
     filename,ext=str(f).split('.')
+    print(filename)
     file = fs.save(filename+'.'+ext,f)
+    print(file)
     fileurl = fs.url(file)
     return JsonResponse({'success':1,
     'file': 
-    {'url':fileurl, "size": fs.size(filename), "name": str(f), "extension": ext}
+    {'url':fileurl, "size": fs.size(file), "name": str(f), "extension": ext}
     })

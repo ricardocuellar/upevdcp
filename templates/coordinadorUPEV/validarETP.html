@@ -12,30 +12,45 @@
 
         <th scope="col">Oficio</th>
         <th scope="col">Materia</th>
-        <th scope="col">Unidad Academica</th>
+        <th scope="col">Carrera - Unidad Academica</th>
+        <th scope="col">Solicitante</th>
         <th scope="col">Última actualización</th>
         <th scope="col">Ver última versión correcciones</th>
         <th scope="col">Validar evaluación</th>
       </tr>
     </thead>
     <tbody>
-      
 
+
+      {% for etp in etps  %}
+        
+        {% if etp.estado == 'Terminado' %}
         <tr>
-          <td scope="row">599</td>
-          <td>Álgebra Lineal</td>
-          <td>ESCOM</td>
-          <td>20 de Diciembre de 2020 a las 23:54</td>
-          <td><a href="">Descargar</a></td>
-          <td><a class="btn btn-info"  href="">Aprobar ETP</a></td>
-          <td>{{etp.solicitante}}</td>
+            <td scope="row">{{etp.oficio}}</td>
+            <td>{{etp.materia}}</td>
+            <td>
+            {% for carrera in etp.materia.carreras.all  %}
+            {{carrera}} - {{carrera.unidadacademica}}
+            <br>
+            {% endfor %}
+            </td>
+            <td>{{etp.solicitante}}</td>
+            <td>{{etp.modified}}</td>
+            <td><a href="">Descargar</a></td>
+            <td><a class="btn btn-info"  href="">Aprobar ETP</a></td>
         </tr>
+       
+        {% endif %}
+
+      {% endfor %}
 
 
     </tbody>
   </table>
 
   <hr>
+
+  
 
 
 {% endblock %}

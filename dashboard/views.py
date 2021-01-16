@@ -237,7 +237,6 @@ def tableroActividades(request):
     user_id = request.user.pk
     role = request.user.usersrole.evaluador
     tareas = Tarea.objects.filter(user_tasks_id=user_id)
-    print(tareas)
     equipo = Equipo.objects
     
     #todo meter aqui los solicitantes_id
@@ -254,7 +253,6 @@ def tableroActividades(request):
     if request.method == 'POST':
         if request.POST['solicitud'] == 'validar':
             tareas = Tarea.objects.filter(user_tasks_id=request.POST['user']).get(etp_task_id=request.POST['etp'])
-            print(tareas)
             user_id = UsersRole.objects.get(user_id=request.POST['user'])
             etp = ETP.objects.get(pk=request.POST['etp'])     
             tareas.estado_tarea = 'Haciendo'
@@ -268,6 +266,7 @@ def tableroActividades(request):
                 etp.estado = 'Estilos'
             tareas.save()    
             etp.save()
+            return redirect('/dashboard/tablero-actividades')
 
         elif request.POST['solicitud'] == 'revisar':
             tareas = Tarea.objects.filter(user_tasks_id=request.POST['evaluador']).get(etp_task_id=request.POST['etp'])
@@ -312,10 +311,23 @@ def tableroActividades(request):
 
 
 
-def reanudarTarea(request, tareaID):
+def reanudarTarea(request, tareaID, etpID):
+    role = request.user.usersrole.evaluador
     tarea = Tarea.objects.get(id=tareaID)
     tarea.estado_tarea = 'Haciendo'
     tarea.save()
+
+    etp = ETP.objects.get(id=etpID)
+    if role == 'originalidad':
+        etp.estado = 'Originalidad'
+    elif role == 'pedagogo':
+        etp.estado = 'Pedagógico'
+    elif role == 'comunicologo':
+        etp.estado = 'Comunicación'
+    elif role == 'estilos':
+        etp.estado = 'Estilos'
+    etp.save()
+
     return redirect('/dashboard/tablero-actividades') 
 
 

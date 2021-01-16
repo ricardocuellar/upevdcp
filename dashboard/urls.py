@@ -101,7 +101,7 @@ urlpatterns = [
     ),
 
     #Tarea estados
-    path('reanudarTarea/<int:tareaID>/', reanudarTarea, name='reanudarTarea'),
+    path('reanudarTarea/<int:tareaID>/<int:etpID>', reanudarTarea, name='reanudarTarea'),
 
      #Uploads
     path('fileUPload/',csrf_exempt(upload_file_view)),

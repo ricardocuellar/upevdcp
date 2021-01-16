@@ -32,13 +32,31 @@
                       <h5 class="card-title">{{tarea.etp_task.materia}}</h5>
                       <p>Oficio: <strong>{{tarea.etp_task.oficio}}</strong></p>
                       <p>Equipo: <strong>{{tarea.etp_task.equipo.id}}</strong></p>
-                      <p class="card-text">Tienes esta tarea asignada, para iniciar selecciona aceptar</p>
                       <form method="POST" action="{% url "dashboard:tableroActividades" %}" enctype="multipart/form-data" id="validation_etp{{tarea.etp_task.id}}">
                         {% csrf_token %}
                         <input type="hidden" name="etp" value="{{tarea.etp_task.id}}" />
                         <input type="hidden" name="user" value="{{user_id}}">
                         <input type="hidden" name="solicitud" value="validar">
+                        
+                        
+                        
+                        {% if rol == 'originalidad' and tarea.etp_task.estado == 'Espera'  %}
+                        <p class="card-text">Tienes esta tarea asignada, para iniciar selecciona aceptar</p>
                         <input type="button" class="btn btn-info" value="Aceptar" id="aceptar_etp{{tarea.etp_task.id}}">
+                        {% elif rol == 'pedagogo' and tarea.etp_task.estado == 'Pedagógico' %}
+                        <p class="card-text">Tienes esta tarea asignada, para iniciar selecciona aceptar</p>
+                        <input type="button" class="btn btn-info" value="Aceptar" id="aceptar_etp{{tarea.etp_task.id}}">
+                        {% elif rol == 'comunicologo' and tarea.etp_task.estado == 'Comunicación' %}
+                        <p class="card-text">Tienes esta tarea asignada, para iniciar selecciona aceptar</p>
+                        <input type="button" class="btn btn-info" value="Aceptar" id="aceptar_etp{{tarea.etp_task.id}}">
+                        {% elif rol == 'estilos' and tarea.etp_task.estado == 'Estilos' %}
+                        <p class="card-text">Tienes esta tarea asignada, para iniciar selecciona aceptar</p>
+                        <input type="button" class="btn btn-info" value="Aceptar" id="aceptar_etp{{tarea.etp_task.id}}">
+                        {% else%}   
+                        <p class="card-text">Aún no es tu turno de realizar la evaluación.</p>
+                        {% endif %}
+                          
+                  
                       </form>
                       
                   </div>
@@ -112,7 +130,7 @@
                       {% if tarea.etp_task.pendientes == 1 %} 
                       <p class="bg-light">En espera de correcciones</p>
                       {% else %}
-                      <a href="{% url 'dashboard:reanudarTarea' tareaID=tarea.id %}" class="btn btn-info mb-3" >Reanudar evaluación</a>
+                      <a href="{% url 'dashboard:reanudarTarea' tareaID=tarea.id etpID=tarea.etp_task.id %}" class="btn btn-info mb-3" >Reanudar evaluación</a>
                       {% endif %}
                       <a href="{% url 'dashboard:tablaComentarios' etpID=tarea.etp_task.id %}" class="btn btn-info">Ir observaciones</a>
                     </div>

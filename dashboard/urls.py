@@ -5,10 +5,11 @@ from django.urls import path
 from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
-from comentarios.views import home,verComentario,upload_file_view, upload_image_view, verTablaComentarios
+from comentarios.views import home,verComentario,upload_file_view, upload_image_view, verTablaComentarios, confirmarCorreccion
 from django.views.decorators.csrf import csrf_exempt
 # Views 
 from dashboard import views
+from dashboard.views import reanudarTarea
 
 urlpatterns = [
     
@@ -99,6 +100,8 @@ urlpatterns = [
         name='cambiarEstadoETP'
     ),
 
+    #Tarea estados
+    path('reanudarTarea/<int:tareaID>/', reanudarTarea, name='reanudarTarea'),
 
      #Uploads
     path('fileUPload/',csrf_exempt(upload_file_view)),
@@ -106,9 +109,10 @@ urlpatterns = [
 
     #Comentarios
     path('editorComentarios/',home),
-    path('tablaComentarios/<int:etpID>/', verTablaComentarios),
-    path('comentario/<int:comentarioID>/',verComentario),
-
+    path('tablaComentarios/<int:etpID>/', verTablaComentarios, name='tablaComentarios'),
+    path('tablaComentarios/confirmarCorrecciones/<int:etpID>/<int:comentarioID>', confirmarCorreccion, name='confirmarCorreccion'),
+    path('comentario/<int:comentarioID>/',verComentario, name='verComentario'),
+    
     
     
 

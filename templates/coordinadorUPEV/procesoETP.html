@@ -14,6 +14,7 @@
         <th scope="col">Fecha inicio</th>
         <th scope="col">Equipo</th>
         <th scope="col">Estado</th>
+        <th scope="col">Observaciones</th>
       </tr>
     </thead>
     <tbody>
@@ -33,6 +34,13 @@
               <td>{{etp.equipo.id}}</td>
           {% endif %}
           <td>{{etp.estado}}</td>
+          <td>
+            
+            {% if etp.estado == 'Espera' %}
+              <a href="{% url 'dashboard:tablaComentarios' etpID=etp.id %}">Ver</a>  
+            {% endif %}
+            
+          </td>
         </tr>
 
       {% endif %}

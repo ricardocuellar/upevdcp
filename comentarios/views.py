@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.decorators.csrf import requires_csrf_token
 from django.core.files.storage import FileSystemStorage
 from django.http import JsonResponse
@@ -59,3 +59,14 @@ def verTablaComentarios(request,etpID):
     comentarios = Comentario.objects.filter(etp_id=etpID)
     etp = ETP.objects.get(id=etpID)
     return render(request,'comentario/verTablaComentarios.html',{'comentarios':comentarios, 'etp':etp})
+
+def confirmarCorreccion(request, etpID, comentarioID):
+    comentarios = Comentario.objects.get(id=comentarioID)
+    etp = ETP.objects.get(id=etpID)
+    comentarios.revisado = 1
+    etp.pendientes = 0
+    comentarios.save()
+    etp.save()
+
+    return redirect('/dashboard/tablaComentarios/'+str(etpID))
+

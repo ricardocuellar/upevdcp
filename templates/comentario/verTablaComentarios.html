@@ -20,6 +20,13 @@
         <th scope="col">Evaluador</th>
         <th scope="col">Ir a comentario</th>
         <th scope="col">Corregido</th>
+        <th scope="col">Fecha comentario</th>
+        <th scope="col">Estado ETP</th>
+        
+        {% if request.user.usersrole.role == 'uteycv' %}
+        <th scope="col">¿Se han hecho correcciones?</th>    
+        {% endif %}
+            
     </thead>
     <tbody>
     
@@ -37,6 +44,17 @@
                         {% endif %}
                             
                     </td>
+                    <td>{{comentario.created}}</td>
+                    <td>{{comentario.etpEstado}}</td>
+                    {% if request.user.usersrole.role == 'uteycv' %}
+                        <td scope="col">
+                            {% if comentario.revisado == 1  %}
+                                <p class="text-success">Confirmado</p>
+                            {% else %}
+                                <a href="{% url 'dashboard:confirmarCorreccion' etpID=etp.id comentarioID=comentario.id %}">Confirmar</a></td>    
+                            {% endif %}
+                            
+                    {% endif %}
                 </tr>
            
             

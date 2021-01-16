@@ -32,3 +32,8 @@ class Comentario(models.Model):
     evaluador =  models.ForeignKey(User, on_delete=models.CASCADE)  
 
     revisado = models.BooleanField(default=0)
+
+    etpEstado = models.CharField(max_length=70)
+
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)

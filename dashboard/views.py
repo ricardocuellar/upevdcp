@@ -312,6 +312,12 @@ def tableroActividades(request):
 
 
 
+def reanudarTarea(request, tareaID):
+    tarea = Tarea.objects.get(id=tareaID)
+    tarea.estado_tarea = 'Haciendo'
+    tarea.save()
+    return redirect('/dashboard/tablero-actividades') 
+
 
 def home(request):
     if request.method == "POST":

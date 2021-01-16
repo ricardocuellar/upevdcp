@@ -112,9 +112,9 @@
                       {% if tarea.etp_task.pendientes == 1 %} 
                       <p class="bg-light">En espera de correcciones</p>
                       {% else %}
-                      <a href="#" class="btn btn-info" >Reanudar evaluación</a>
+                      <a href="{% url 'dashboard:reanudarTarea' tareaID=tarea.id %}" class="btn btn-info mb-3" >Reanudar evaluación</a>
                       {% endif %}
-                      <a href="" class="btn btn-info">Ver observaciones</a>
+                      <a href="{% url 'dashboard:tablaComentarios' etpID=tarea.etp_task.id %}" class="btn btn-info">Ir observaciones</a>
                     </div>
                   </div>
                 </td>

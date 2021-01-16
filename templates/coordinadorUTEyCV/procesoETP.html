@@ -57,7 +57,7 @@
                     <p>Oficio: <strong>{{etp.oficio}}</strong></p>
                     <p>Equipo: <strong>{{etp.equipo.id}}</strong></p>
                     <p>Tipo de evaluación: <strong>{{etp.estado}}</strong></p>
-                    <p class="card-text"><a href="">Tienes observaciones en esta solicitud </a></p>
+                    <p class="card-text"><a href="{% url 'dashboard:tablaComentarios' etpID=etp.id %}">Tienes observaciones en esta solicitud </a></p>
                   </div>
                 </div>
               </td>

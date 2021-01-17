@@ -81,7 +81,16 @@ def solicitudesETP(request, escuela=None):
 @login_required(redirect_field_name=None)
 @admin_required
 def validarETP(request):
-    etps = ETP.objects.filter(solicitud_aprobada=1)
+
+    if request.method == 'POST':
+        if request.POST['solicitud'] == 'validar':
+            etp = ETP.objects.get(pk=request.POST['etpID'])
+            etp.revision = 1
+            etp.terminado = 1
+            etp.save()
+
+
+    etps = ETP.objects.filter(solicitud_aprobada=1).filter(revision=0).filter(terminado=0)
     contex = {'etps': etps}
     return render(request, 'coordinadorUPEV/validarETP.html',contex)
 

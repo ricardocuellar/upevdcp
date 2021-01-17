@@ -36,7 +36,7 @@
             </td>
             <td>{{etp.solicitante}}</td>
             <td>{{etp.modified}}</td>
-            <td><a href="">Descargar</a></td>
+            <td><a href="{% url 'dashboard:descargarUltimoReporte' etpID=etp.id %}">Descargar</a></td>
             <td><a class="btn btn-info"  href="">Aprobar ETP</a></td>
         </tr>
        

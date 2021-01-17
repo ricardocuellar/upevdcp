@@ -9,7 +9,7 @@ from comentarios.views import home,verComentario,upload_file_view, upload_image_
 from django.views.decorators.csrf import csrf_exempt
 # Views 
 from dashboard import views
-from dashboard.views import reanudarTarea
+from dashboard.views import reanudarTarea, descargarUltimoReporte
 
 urlpatterns = [
     
@@ -113,7 +113,8 @@ urlpatterns = [
     path('tablaComentarios/confirmarCorrecciones/<int:etpID>/<int:comentarioID>', confirmarCorreccion, name='confirmarCorreccion'),
     path('comentario/<int:comentarioID>/',verComentario, name='verComentario'),
     
-    
+    #Admins descargar última versión
+    path('descargar/ultimoReporte/<int:etpID>/', descargarUltimoReporte, name='descargarUltimoReporte'),
     
 
 ]

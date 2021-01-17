@@ -141,6 +141,12 @@ class crearEquipos(LoginRequiredMixin,CreateView):
    
 
 
+def descargarUltimoReporte(request, etpID):
+    comentarios = Comentario.objects.filter(etp_id=etpID)
+    ultimo_comentario = comentarios[len(comentarios)-1]
+    return render(request,'comentario/comentarioDetail.html',{'comentario':ultimo_comentario})
+
+
 
 #ETP (Evaluación técnico pedagogica) (UTEyCV)
 

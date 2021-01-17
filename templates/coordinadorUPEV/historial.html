@@ -13,31 +13,30 @@
 
         <th scope="col">Oficio</th>
         <th scope="col">Materia</th>
-        <th scope="col">Unidad Academica</th>
+        <th scope="col">Carrera - Unidad Academica</th>
         <th scope="col">Terminada</th>
-        <th scope="col">Ver versiones</th>
+        <th scope="col">Historial de cambios</th>
       </tr>
     </thead>
+
     <tbody>
       
-
-        <tr>
-          <td scope="row">599</td>
-          <td>Álgebra Lineal</td>
-          <td>ESCOM</td>
-          <td>21 de Diciembre de 2020 a las 02:14</td>
-          <td><a class="btn btn-info"  href="">Ver versiones</a></td>
-          
-        </tr>
-
-        <tr>
-            <td scope="row">239</td>
-            <td>Álgebra</td>
-            <td>Cecyt X</td>
-            <td>18 de Diciembre de 2020 a las 04:14</td>
-            <td><a class="btn btn-info"  href="">Ver versiones</a></td>
-            
-          </tr>
+        {% for etp in etps  %}
+            <tr>
+              <td scope="row">{{etp.oficio}}</td>
+              <td>{{etp.materia}}</td>
+              <td>
+                {% for carrera in etp.materia.carreras.all  %}
+                {{carrera}} - {{carrera.unidadacademica}}
+                <br>
+                {% endfor %}
+              </td>
+              <td>{{etp.modified}}</td>
+              <td><a class="btn btn-info"  href="{% url 'dashboard:tablaComentarios' etpID=etp.id %}">Ver historial</a></td>
+              
+            </tr>
+        {% endfor %}
+        
 
 
     </tbody>

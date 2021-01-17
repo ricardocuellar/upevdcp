@@ -15,7 +15,7 @@
         <th scope="col">Contraseña</th>
         <th scope="col">Fecha de solicitud</th>
         <th scope="col">Materia</th>
-        <th scope="col">Unidad Academica</th>
+        <th scope="col">Carrera - Unidad Academica</th>
         <th scope="col">Solicitante</th>
         <th scope="col">Solicitud</th>
         <th scope="col">Aceptar solicitud</th>
@@ -36,7 +36,12 @@
           <td>{{etp.password_plataforma}}</td>
           <td>{{etp.created}}</td>
           <td>{{etp.materia}}</td>
-          <td>ESCA Sto</td>
+          <td>
+            {% for carrera in etp.materia.carreras.all  %}
+            {{carrera}} - {{carrera.unidadacademica}}
+            <br>
+            {% endfor %}
+          </td>
           <td>{{etp.solicitante}}</td>
           <td><a href="{{ etp.documento.url }}">Descargar solicitud</a></td>
           <form method="POST" action="{% url "dashboard:solicitudesETP" %}" enctype="multipart/form-data" id="validation_etp{{etp.id}}">

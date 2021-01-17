@@ -98,7 +98,9 @@ def validarETP(request):
 @login_required(redirect_field_name=None)
 @admin_required
 def historialETP(request):
-    return render(request, 'coordinadorUPEV/historial.html')
+    etps = ETP.objects.filter(revision=1).filter(terminado=1)
+    context = {'etps':etps}
+    return render(request, 'coordinadorUPEV/historial.html', context)
 
 
 @login_required(redirect_field_name=None)

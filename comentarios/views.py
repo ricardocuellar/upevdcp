@@ -14,7 +14,7 @@ def home(request):
         if form.is_valid():
             comentario = form.save()
             return render(request, 'comentario/index.html',{'form':form})
-    
+
     form = ComentarioForm()
     return render(request, 'comentario/index.html',{'form':form})
 

@@ -13,9 +13,12 @@
     {{form.as_p}}
     {{form.etp_id.as_hidden}}
     {{form.evaluador_id.as_hidden}}
+    {{form.etpEstado.as_hidden}}
     <input type="hidden" name="evaluador" value="{{ user.pk}}" />
     <input type="hidden" name="etp" value="{{ tarea.etp_task.id}}" />
+    <input type="hidden" name="etpEstado" id="id_etpEstado" value="{{ tarea.etp_task.estado}}"  />
     <input type="hidden" name="solicitud" value="revisar">
+   
     
 
     <div class="modal-footer">

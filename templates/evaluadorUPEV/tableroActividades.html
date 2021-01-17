@@ -23,7 +23,9 @@
       {#% if user_id == etp.equipo.evaluador_originalidad_id or user_id == etp.equipo.evaluador_comunicologo_id or user_id == etp.equipo.evaluador_pedagogo_id or user_id == etp.equipo.evaluador_estilos_id %#}
        
       {% for tarea  in tareas  %}
-
+        
+        {% if tarea.etp_task.terminado == 0 %}
+            
             <tr>        
               {% if tarea.estado_tarea == 'Pendientes'  %}
                 <td style="width: 120px;">
@@ -241,7 +243,7 @@
 
 
 
-
+            {% endif %}
           
             {% endfor %}
       {#% endif %#}

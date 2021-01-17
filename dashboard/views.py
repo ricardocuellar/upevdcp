@@ -242,6 +242,13 @@ def etpSolicitudes(request):
     return render(request, 'coordinadorUTEyCV/solicitudesETP.html',context)
 
 
+def etpsTerminadas(request):
+    user_id = request.user.id
+    etps = ETP.objects.filter(solicitante_id=user_id).filter(revision=1).filter(terminado=1)
+    context = {'etps':etps}
+    return render(request, 'coordinadorUTEyCV/etpsTerminadas.html', context)
+
+
 # Actividades (Evaluadores)
 
 @login_required(redirect_field_name=None)

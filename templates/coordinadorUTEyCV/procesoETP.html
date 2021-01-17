@@ -16,7 +16,12 @@
     </thead>
     <tbody>        
         {% for etp in etps  %}
+        {% if etp.terminado == 0 %}
         <tr>        
+          
+          
+         
+            
             {% if etp.estado == 'Proceso'  %}
               <td style="width: 120px;">
                 <div class="card " style="width: 18rem;">
@@ -34,7 +39,7 @@
             {% endif %}
             
 
-            {% if etp.estado != 'Proceso' and etp.estado != 'Espera'  %}
+            {% if etp.estado != 'Proceso' and etp.estado != 'Espera' and etp.estado != 'Terminado'  %}
               <td style="width: 120px;">
                 <div class="card " style="width: 18rem;">
                   <div class="card-body">
@@ -66,14 +71,14 @@
             {% endif %}
 
 
-            {% if etp.estado == 'Terminado'  %}
+            {% if etp.estado == 'Terminado' %}
               <td style="width: 120px;">
                 <div class="card " style="width: 18rem;">
                   <div class="card-body">
                     <h5 class="card-title">{{etp.materia}}</h5>
                     <p>Oficio: <strong>{{etp.oficio}}</strong></p>
                     <p>Equipo: <strong>{{etp.equipo.id}}</strong></p>
-                    <p class="card-text">Esta tarea aún no se ha iniciado.</p>
+                    <p class="card-text">Esta tarea se ha terminado desaparecerá de su tablero una vez validada.</p>
                   </div>
                 </div>
               </td>
@@ -82,6 +87,7 @@
             {% endif %}
             
         </tr>
+        {% endif %}
         {% endfor %}
             
 

@@ -68,6 +68,12 @@ urlpatterns = [
         view=views.etpSolicitudes,
         name='etpSolicitudes'
     ),
+    path(   
+        route='etps-terminadas',
+        view=views.etpsTerminadas,
+        name='etpsTerminadas'
+    ),
+
     #Evaluador UPEV
     path(
         route='tablero-actividades',

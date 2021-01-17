@@ -19,6 +19,9 @@
     <tbody>
 
         {% for etp in etps %}
+        
+        {% if etp.terminado == 0 %}
+                
         <tr>
             <th scope="row">{{etp.materia_id}}</th>
             <td>{{etp.oficio}}</td>
@@ -32,6 +35,8 @@
             {% endif %}
 
         </tr>
+
+        {% endif %}
         {% endfor %}
 
 

@@ -4,26 +4,37 @@
 {% block container %}
 
 <h1>Actividades pasadas</h1>
+<p>Aquí se encuentran las actividades que ya terminaste</p>
 <table class="table table-striped">
   <thead>
     <tr>
 
       <th scope="col">Oficio</th>
       <th scope="col">Materia</th>
-      <th scope="col">Unidad Academica</th>
+      <th scope="col">Carrera - Unidad Academica</th>
       <th scope="col">Terminada</th>
     </tr>
   </thead>
   <tbody>
     
 
+    {% for tarea in tareas  %}
+      
       <tr>
-        <td scope="row">599</td>
-        <td>Álgebra Lineal</td>
-        <td>ESCOM</td>
-        <td>21 de Diciembre de 2020 a las 01:44</td>
+        <td scope="row">{{tarea.etp_task.oficio}}</td>
+        <td>{{tarea.etp_task.materia}}</td>
+        <td>
+          {% for carrera in tarea.etp_task.materia.carreras.all  %}
+          {{carrera}} - {{carrera.unidadacademica}}
+          <br>
+          {% endfor %}
+        </td>
+        <td>{{tarea.modified}}</td>
         
       </tr>
+    {% endfor %}
+
+      
 
 
 

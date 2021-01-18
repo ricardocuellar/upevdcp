@@ -93,7 +93,6 @@ def validarETP(request):
 
             solicitante = request.POST['solicitanteEmail']
             materia = request.POST['nombreMateria']
-            print(solicitante)
             subject = 'Tu evaluación de la materia: '+materia+' ha sido finalizada '
             message = 'Por favor comunicate con el Departamento de Coordinación de Programas de la DEV.'
             email_from = settings.EMAIL_HOST_USER
@@ -398,7 +397,9 @@ def verComentario(request, comentarioID):
 @evaluador_required
 def pasadasActividades(request):
     """Actividades pasadas"""
-    return render(request, 'evaluadorUPEV/actividadesPasadas.html')
+    tareas = Tarea.objects.filter(user_tasks_id=request.user.id) 
+    
+    return render(request, 'evaluadorUPEV/actividadesPasadas.html',{'tareas':tareas})
 
 
 @login_required(redirect_field_name=None)

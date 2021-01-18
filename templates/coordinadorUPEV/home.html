@@ -10,30 +10,30 @@
 <div class="upev-dashboard-menu">
 <div class="row">
     
-        <a class="col" href="">
+        <a class="col" href="{% url 'dashboard:procesoETPs' %}">
             Ver ETPs en evaluación
         </a>
     
-        <a class="col" href="">
+        <a class="col" href="{% url 'dashboard:validarETP' %}">
             Validar ETPs
         </a>
    
     
-        <a class="col" href="">
+        <a class="col" href="{% url 'dashboard:solicitudesETP' %}">
             Ver nuevas ETPs
         </a>
 </div>
 
 <div class="row">
     
-        <a class="col" href="">
+        <a class="col" href="{% url 'dashboard:verEquipos' %}">
             Ver equipos
     
-        <a class="col" href=""> 
+        <a class="col" href="{% url 'dashboard:crearEquipos' %}"> 
             Crear equipos
         </a>
     
-        <a  class="col" href="">
+        <a  class="col" href="{% url 'dashboard:historialETP' %}">
             Ver historial de ETPs
         </a>
     

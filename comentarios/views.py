@@ -18,7 +18,7 @@ def home(request):
     form = ComentarioForm()
     return render(request, 'comentario/index.html',{'form':form})
 
-
+    
 def verComentario(request, comentarioID):
     comentario = Comentario.objects.get(id=comentarioID)
     return render(request,'comentario/comentarioDetail.html',{'comentario':comentario})

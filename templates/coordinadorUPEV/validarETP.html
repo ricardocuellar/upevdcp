@@ -42,6 +42,8 @@
               <input type="hidden" name="etpID" value="{{ etp.id}}" />
               <input type="hidden" name="solicitud" value="validar">
               <td><input type="button" class="btn btn-info" value="Validar ETP" id="validar_etp{{etp.id}}"></td>
+              <input type="hidden" name="nombreMateria" id="nombreMateria" value="{{etp.materia}}">
+              <input type="hidden" name="solicitanteEmail" id="solicitanteEmail" value="{{etp.solicitante.email}}">
             </form>
         </tr>
        

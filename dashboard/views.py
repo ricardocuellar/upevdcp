@@ -29,7 +29,9 @@ from equipos.models import Equipo
 from dashboard.decorators import admin_required, uteycv_required, evaluador_required
 from tareas.models import Tarea
 
-
+#Email service 
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 
@@ -88,6 +90,17 @@ def validarETP(request):
             etp.revision = 1
             etp.terminado = 1
             etp.save()
+
+            solicitante = request.POST['solicitanteEmail']
+            materia = request.POST['nombreMateria']
+            print(solicitante)
+            subject = 'Tu evaluación de la materia: '+materia+' ha sido finalizada '
+            message = 'Por favor comunicate con el Departamento de Coordinación de Programas de la DEV.'
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list = [solicitante, 'rcuellarsn@gmail.com']
+            send_mail( subject, message, email_from, recipient_list )
+
+
 
 
     etps = ETP.objects.filter(solicitud_aprobada=1).filter(revision=0).filter(terminado=0)

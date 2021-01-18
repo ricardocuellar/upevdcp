@@ -42,7 +42,7 @@
                         
                         
                         
-                        {% if rol == 'originalidad' and tarea.etp_task.estado == 'Espera'  %}
+                        {% if rol == 'originalidad' and tarea.etp_task.estado == 'Proceso'  %}
                         <p class="card-text">Tienes esta tarea asignada, para iniciar selecciona aceptar</p>
                         <input type="button" class="btn btn-info" value="Aceptar" id="aceptar_etp{{tarea.etp_task.id}}">
                         {% elif rol == 'pedagogo' and tarea.etp_task.estado == 'Pedagógico' %}

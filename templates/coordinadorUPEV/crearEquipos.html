@@ -79,7 +79,7 @@
 
                 <div class="form-group">
                     <label for="id_etp">ETP asignada</label>
-                    <select class="form-control" name="id_etp" id="id_etp">
+                    <select class="form-control" name="id_etp" id="id_etp" required>
                        {% for etp in etps  %}
                             {{etp}}
                             {% if etp.equipo == '' %}
@@ -101,8 +101,50 @@
 
 
                 <input type="submit" class="btn btn-primary btn-block mt-5" value="Enviar">
-                <input type="submit" class="btn btn-info btn-block mt-5" value="Generar automáticamente">
+
+
+                <button type="submit" class="btn btn-info btn-block mt-5" onclick="generate()">Generar automáticamente</button>
+                
+                
             </form>
+
+            
+                <script>
+                    function generate(){
+                        
+                        var originalidad = document.getElementById('evaluador_originalidad');
+                        originalidad.value = getRandomValue('evaluador_originalidad')
+                        
+      
+
+                        var estilos = document.getElementById('evaluador_estilos');
+                        estilos.value = getRandomValue('evaluador_estilos')
+                        
+                    
+                        var pedagogo = document.getElementById('evaluador_pedagogo');
+                        pedagogo.value = getRandomValue('evaluador_pedagogo')
+
+
+                        var comunicologo = document.getElementById('evaluador_comunicologo');
+                        comunicologo.value = getRandomValue('evaluador_comunicologo')
+
+                    }
+
+                    function getRandomValue(tipoEvaluador){
+                        var evaluadorArr = []
+                        var evaluador = document.getElementById(tipoEvaluador);
+                        var evaluadorOptions = evaluador.options;
+                        for(let opt of evaluadorOptions){
+                            evaluadorArr.push(opt.value)
+                        }
+                        const randomevaluador = Math.floor(Math.random() * evaluadorArr.length)
+                        const optevaluador = evaluadorArr[randomevaluador]
+
+                        return optevaluador
+                    }
+                </script>
+
+
         </div>
     </div>
 </div>

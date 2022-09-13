@@ -1,0 +1,47 @@
+{%extends "coordinadorUTEyCV/dashboardUTEyCV.html" %}
+
+
+{# Container del dashboard#}
+{% block container %}
+
+<h1>Solicitudes para evaluación</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">UAL</th>
+            <th scope="col">Oficio</th>
+            <th scope="col">Fecha inicio</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Solicitud aceptada</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for etp in etps %}
+        
+        {% if etp.terminado == 0 %}
+                
+        <tr>
+            <th scope="row">{{etp.materia_id}}</th>
+            <td>{{etp.oficio}}</td>
+            <td>{{etp.created}}</td>
+            <td>{{etp.estado}}</td>
+
+            {% if etp.solicitud_aprobada %}
+            <td>Si</td>
+            {% else %}
+            <td></td>
+            {% endif %}
+
+        </tr>
+
+        {% endif %}
+        {% endfor %}
+
+
+    </tbody>
+</table>
+
+
+{% endblock %}

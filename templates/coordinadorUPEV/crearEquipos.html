@@ -1,0 +1,152 @@
+{%extends "coordinadorUPEV/dashboardUPEV.html" %}
+
+
+{# Container del dashboard#}
+{% block container %}
+
+<h1>Crear equipos de trabajo</h1>
+
+
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-6 pb-3" id="profile-box">
+            <h4 class="mb-4">Crear equipo de trabajo</h4>
+            
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" name="user" value="{{ user.pk}}" /> {# Website field #}
+
+
+                <div class="form-group">
+                    <label for="evaluador_originalidad">Evaluador Originalidad</label>
+                    <select class="form-control" name="evaluador_originalidad" id="evaluador_originalidad">
+                       {% for evaluador in evaluadores  %}
+                            {% if evaluador.evaluador == "originalidad" %}
+                                <option value="{{evaluador.user_id}}">{{evaluador.user}}</option>
+                            {% endif %}
+                        {% endfor %} 
+                        
+                    </select>
+                    <div class="invalid-feedback">
+                        {% for error in form.evaluador_originalidad.errors %}{{ error }}{% endfor %}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="evaluador_estilos">Evaluador Estilos</label>
+                    <select class="form-control" name="evaluador_estilos" id="evaluador_estilos">
+                        {% for evaluador in evaluadores  %}
+                            {% if evaluador.evaluador == "estilos" %}
+                                    <option value="{{evaluador.user_id}}">{{evaluador.user}}</option>
+                            {% endif %}
+                        {% endfor %} 
+                        
+                    </select>
+                    <div class="invalid-feedback">
+                        {% for error in form.evaluador_estilos.errors %}{{ error }}{% endfor %}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="evaluador_pedagogo">Evaluador Pedagogo</label>
+                    <select class="form-control" name="evaluador_pedagogo" id="evaluador_pedagogo">
+                        {% for evaluador in evaluadores  %}           
+                            {% if evaluador.evaluador == "pedagogo" %}
+                                <option value="{{evaluador.user_id}}">{{evaluador.user}}</option>
+                            {% endif %}              
+                        {% endfor %} 
+                        
+                    </select>
+                    <div class="invalid-feedback">
+                        {% for error in form.evaluador_pedagogo.errors %}{{ error }}{% endfor %}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="evaluador_comunicologo">Evaluador Comunicologo</label>
+                    <select class="form-control" name="evaluador_comunicologo" id="evaluador_comunicologo">
+                        {% for evaluador in evaluadores  %}
+                            {% if evaluador.evaluador == "comunicologo" %}
+                                <option value="{{evaluador.user_id}}">{{evaluador.user}}</option>
+                            {% endif %}
+                        {% endfor %} 
+                        
+                    </select>
+                    <div class="invalid-feedback">
+                        {% for error in form.evaluador_comunicologo.errors %}{{ error }}{% endfor %}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_etp">ETP asignada</label>
+                    <select class="form-control" name="id_etp" id="id_etp" required>
+                       {% for etp in etps  %}
+                            {{etp}}
+                            {% if etp.equipo == '' %}
+                                    <option value="{{etp.pk}}">{{etp.materia}}</option>
+                            {% endif %}                        
+                        {% endfor %} 
+                        
+                    </select>
+                    <div class="invalid-feedback">
+                        {% for error in form.id_etp.errors %}{{ error }}{% endfor %}
+                    </div>
+                </div>
+
+
+
+                <input type="hidden" name="solicitante" value="{{ user.pk}}" />
+
+
+
+
+                <input type="submit" class="btn btn-primary btn-block mt-5" value="Enviar">
+
+
+                <button type="submit" class="btn btn-info btn-block mt-5" onclick="generate()">Generar automáticamente</button>
+                
+                
+            </form>
+
+            
+                <script>
+                    function generate(){
+                        
+                        var originalidad = document.getElementById('evaluador_originalidad');
+                        originalidad.value = getRandomValue('evaluador_originalidad')
+                        
+      
+
+                        var estilos = document.getElementById('evaluador_estilos');
+                        estilos.value = getRandomValue('evaluador_estilos')
+                        
+                    
+                        var pedagogo = document.getElementById('evaluador_pedagogo');
+                        pedagogo.value = getRandomValue('evaluador_pedagogo')
+
+
+                        var comunicologo = document.getElementById('evaluador_comunicologo');
+                        comunicologo.value = getRandomValue('evaluador_comunicologo')
+
+                    }
+
+                    function getRandomValue(tipoEvaluador){
+                        var evaluadorArr = []
+                        var evaluador = document.getElementById(tipoEvaluador);
+                        var evaluadorOptions = evaluador.options;
+                        for(let opt of evaluadorOptions){
+                            evaluadorArr.push(opt.value)
+                        }
+                        const randomevaluador = Math.floor(Math.random() * evaluadorArr.length)
+                        const optevaluador = evaluadorArr[randomevaluador]
+
+                        return optevaluador
+                    }
+                </script>
+
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

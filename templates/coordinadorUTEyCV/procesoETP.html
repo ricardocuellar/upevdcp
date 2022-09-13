@@ -1,0 +1,102 @@
+ {%extends "coordinadorUTEyCV/dashboardUTEyCV.html" %} {# Container del dashboard#} {% block container %}
+
+<h2>ETP en proceso</h2>
+
+<p>Aquí podrás ver tus Evaluaciones Técnico Pedagógicas solicitadas </p>
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Solicitudes</th>
+        <th scope="col">Iniciadas</th>
+        <th scope="col">En espera</th>
+        <th scope="col">Terminadas</th>
+      </tr>
+    </thead>
+    <tbody>        
+        {% for etp in etps  %}
+        {% if etp.terminado == 0 %}
+        <tr>        
+          
+          
+         
+            
+            {% if etp.estado == 'Proceso'  %}
+              <td style="width: 120px;">
+                <div class="card " style="width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">{{etp.materia}}</h5>
+                    <p>Oficio: <strong>{{etp.oficio}}</strong></p>
+                    <p>Equipo: <strong>{{etp.equipo.id}}</strong></p>
+                    <p>Estado de la evaluación: <strong>{{etp.estado}}</strong></p>
+                    <p class="card-text">Esta tarea aún no se ha iniciado.</p>
+                  </div>
+                </div>
+              </td>
+            {% else %}
+              <td></td>
+            {% endif %}
+            
+
+            {% if etp.estado != 'Proceso' and etp.estado != 'Espera' and etp.estado != 'Terminado'  %}
+              <td style="width: 120px;">
+                <div class="card " style="width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">{{etp.materia}}</h5>
+                    <p>Oficio: <strong>{{etp.oficio}}</strong></p>
+                    <p>Equipo: <strong>{{etp.equipo.id}}</strong></p>
+                    <p>Tipo de evaluación: <strong>{{etp.estado}}</strong></p>
+                  </div>
+                </div>
+              </td>
+            {% else %}
+              <td></td>
+            {% endif %}
+            
+            {% if etp.estado == 'Espera'  %}
+              <td style="width: 120px;">
+                <div class="card " style="width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">{{etp.materia}}</h5>
+                    <p>Oficio: <strong>{{etp.oficio}}</strong></p>
+                    <p>Equipo: <strong>{{etp.equipo.id}}</strong></p>
+                    <p>Tipo de evaluación: <strong>{{etp.estado}}</strong></p>
+                    <p class="card-text"><a href="{% url 'dashboard:tablaComentarios' etpID=etp.id %}">Tienes observaciones en esta solicitud </a></p>
+                  </div>
+                </div>
+              </td>
+            {% else %}
+              <td></td>
+            {% endif %}
+
+
+            {% if etp.estado == 'Terminado' %}
+              <td style="width: 120px;">
+                <div class="card " style="width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">{{etp.materia}}</h5>
+                    <p>Oficio: <strong>{{etp.oficio}}</strong></p>
+                    <p>Equipo: <strong>{{etp.equipo.id}}</strong></p>
+                    <p class="card-text">Esta tarea se ha terminado desaparecerá de su tablero una vez validada.</p>
+                  </div>
+                </div>
+              </td>
+            {% else %}
+              <td></td>
+            {% endif %}
+            
+        </tr>
+        {% endif %}
+        {% endfor %}
+            
+
+    </tbody>
+</table>
+
+
+{% endblock %}
+
+
+
+
+<hr>

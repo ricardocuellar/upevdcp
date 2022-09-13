@@ -1,0 +1,108 @@
+{%extends "coordinadorUPEV/dashboardUPEV.html" %}
+
+
+{# Container del dashboard#}
+{% block container %}
+
+<h2>Solicitudes pendientes para ETP</h2>
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Oficio</th>
+        <th scope="col">Usuario</th>
+        <th scope="col">Contraseña</th>
+        <th scope="col">Fecha de solicitud</th>
+        <th scope="col">Materia</th>
+        <th scope="col">Carrera - Unidad Academica</th>
+        <th scope="col">Solicitante</th>
+        <th scope="col">Solicitud</th>
+        <th scope="col">Aceptar solicitud</th>
+
+
+      </tr>
+    </thead>
+    <tbody>
+      
+      {% for etp in etps  %}  
+      
+      {% if etp.solicitud_aprobada == 0 %}
+        
+        <tr>
+          <th scope="row">{{etp.id}}</th>
+          <td>{{etp.oficio}}</td>
+          <td>{{etp.usuario_plataforma}}</td>
+          <td>{{etp.password_plataforma}}</td>
+          <td>{{etp.created}}</td>
+          <td>{{etp.materia}}</td>
+          <td>
+            {% for carrera in etp.materia.carreras.all  %}
+            {{carrera}} - {{carrera.unidadacademica}}
+            <br>
+            {% endfor %}
+          </td>
+          <td>{{etp.solicitante}}</td>
+          <td><a href="{{ etp.documento.url }}">Descargar solicitud</a></td>
+          <form method="POST" action="{% url "dashboard:solicitudesETP" %}" enctype="multipart/form-data" id="validation_etp{{etp.id}}">
+            {% csrf_token %}
+            <input type="hidden" name="user" value="{{ etp.id}}" />
+            <input type="hidden" name="solicitud" value="validar">
+            <td><input type="button" class="btn btn-info" value="Aceptar" id="aceptar_etp{{etp.id}}"></td>
+          </form>
+        </tr>
+
+
+        <script>
+          document.getElementById('aceptar_etp{{etp.id}}').addEventListener('click', function(e){
+            e.preventDefault();
+      
+      
+          
+            Swal.fire({
+              title: '¿Seguro que quieres aceptar la solicitud?',
+              text: "Está acción no se puede revertir",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Sí, aceptar'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                Swal.fire(
+                  'Aceptado',
+                  'La ETP se ha agregado exitosamente',
+                  'success'
+                );
+      
+                document.querySelector("#validation_etp{{etp.id}}").submit();
+                
+              }
+            })
+      
+          });
+      
+      
+          
+      
+      
+        </script>
+
+
+      {% endif %}
+
+      {% endfor %}
+
+      
+
+    </tbody>
+  </table>
+
+  <hr>
+
+  
+
+{% endblock %}
+
+
+  

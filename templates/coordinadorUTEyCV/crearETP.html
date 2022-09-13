@@ -1,0 +1,100 @@
+{%extends "coordinadorUTEyCV/dashboardUTEyCV.html" %} {# Container del dashboard#} {% block container %}
+
+<h1>Crear ETP</h1>
+
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-6 pt-3 pb-3" id="profile-box">
+            <h4 class="mb-4">Crear una ETP</h4>
+
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+
+            {% load crispy_forms_tags %}
+
+            <div class="container">
+                <form method="post" enctype="multipart/form-data" action="">
+                {% csrf_token %}
+                {{form|crispy}}
+                {{form.solicitante.as_hidden}}
+                <input type="hidden" name="solicitante" value="{{ user.pk}}" />
+                <button type="submit" class="btn btn-primary">Crear ETP</button>
+                </form>
+            </div>
+
+
+
+            <!-- <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" name="user" value="{{ user.pk}}" /> {# Website field #}
+
+                <div class="form-group">
+                    <input class="form-control {% if form.oficio.errors %}is-invalid{% endif %}" type="number" name="oficio" placeholder="Oficio">
+                    <div class="invalid-feedback">
+                        {% for error in form.oficio.errors %}{{ error }}{% endfor %}
+                    </div>
+                </div>
+
+                <div class="form-group">
+
+
+                    <label for="materia">Materia</label>
+                    <select class="form-control" name="materia" id="materia">
+                       {% for materia in materias  %}
+                        <option value="{{materia.pk}}">{{materia}}</option>
+                        {% endfor %} 
+                        
+                    </select>
+                    <div class="invalid-feedback">
+                        {% for error in form.materia.errors %}{{ error }}{% endfor %}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input class="form-control {% if form.usuario_plataforma.errors %}is-invalid{% endif %}" type="text" name="usuario_plataforma" placeholder="usuario_plataforma">
+                    <div class="invalid-feedback">
+                        {% for error in form.usuario_plataforma.errors %}{{ error }}{% endfor %}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input class="form-control {% if form.password_plataforma.errors %}is-invalid{% endif %}" type="text" name="password_plataforma" placeholder="password_plataforma">
+                    <div class="invalid-feedback">
+                        {% for error in form.password_plataforma.errors %}{{ error }}{% endfor %}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Subir formato de evaluación:</label>
+                    <input class="form-control {% if form.documento.errors %}is-invalid{% endif %}" type="file" name="documento" >
+                    <div class="invalid-feedback">
+                        {% for error in form.documento.errors %}{{ error }}{% endfor %}
+                    </div>
+                </div>
+
+                <input type="hidden" name="solicitante" value="{{ user.pk}}" />
+
+
+
+
+                <input type="submit" class="btn btn-primary btn-block mt-5" value="Enviar">
+            </form> -->
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{%extends "dashboard/base.html" %} 
+{% block head_content %}
+<title>DEV | Dashboard UTEyCV</title>
+{% endblock head_content %} 
+{% block menu_options %}
+
+<a href="{% url "dashboard:dashboard" %}" class="list-group-item list-group-item-action bg-light">Inicio</a>
+<a href="{% url "dashboard:etpProceso" %}" class="list-group-item list-group-item-action bg-light">ETP en proceso</a>
+<a href="{% url "dashboard:etpCrear" %}" class="list-group-item list-group-item-action bg-light">Crear ETP</a>
+<a href="{% url "dashboard:etpSolicitudes" %}" class="list-group-item list-group-item-action bg-light">Solicitudes de ETP</a> 
+<a href="{% url "dashboard:etpsTerminadas" %}" class="list-group-item list-group-item-action bg-light">ETPs evaludas</a>
+
+{% endblock menu_options %} {# Container del dashboard#} 
+{% block container %} 
+{% endblock %}

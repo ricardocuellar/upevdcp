@@ -1,0 +1,70 @@
+html, body {
+    background: #fafafa;
+    height: 100%;
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+}
+
+body{
+    padding-top: 70px;
+}
+
+#auth-container {
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 1px;
+}
+
+#main-navbar {
+    background: #fff;
+    border-bottom: 1px solid rgba(0,0,0,.0975);
+}
+
+.post-container {
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+}
+
+.nav-icon a {
+    color: #262626;
+    font-size: 1.3em;
+    display: block;
+    margin-top: .2em;
+    margin-left: 1.2em;
+    font-weight: 100;
+}
+.nav-icon a:hover {
+    color: #1d5e72;;
+}
+#profile-box {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,.0975);
+    border-radius: 1px;
+    margin-top: 6em;
+}
+
+#user-posts #post-thumb {
+    background: #fff;
+}
+
+
+/*UPEV Dashboard*/
+.upev-dashboard-menu .row{
+    margin: 50px;
+    display: flex;
+    justify-content: center;
+    
+}
+
+
+
+.upev-dashboard-menu .row .col{
+    padding: 80px;
+    margin: 10px;
+    border: 2px solid black;
+    color: black;
+    text-align: center;
+    background-color: #e6e6e6;
+}
+

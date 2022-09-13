@@ -1,0 +1,48 @@
+{%extends "coordinadorUPEV/dashboardUPEV.html" %}
+
+
+{# Container del dashboard#}
+{% block container %}
+
+<h1>Ver ETPs anteriores</h1>
+
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+
+        <th scope="col">Oficio</th>
+        <th scope="col">Materia</th>
+        <th scope="col">Carrera - Unidad Academica</th>
+        <th scope="col">Terminada</th>
+        <th scope="col">Historial de cambios</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      
+        {% for etp in etps  %}
+            <tr>
+              <td scope="row">{{etp.oficio}}</td>
+              <td>{{etp.materia}}</td>
+              <td>
+                {% for carrera in etp.materia.carreras.all  %}
+                {{carrera}} - {{carrera.unidadacademica}}
+                <br>
+                {% endfor %}
+              </td>
+              <td>{{etp.modified}}</td>
+              <td><a class="btn btn-info"  href="{% url 'dashboard:tablaComentarios' etpID=etp.id %}">Ver historial</a></td>
+              
+            </tr>
+        {% endfor %}
+        
+
+
+    </tbody>
+  </table>
+
+  <hr>
+
+
+{% endblock %}

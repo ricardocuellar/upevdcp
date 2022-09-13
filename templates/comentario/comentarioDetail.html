@@ -1,0 +1,92 @@
+
+{%extends "dashboard/base.html" %}
+
+{% block head_content %}
+<title>DEV | Dashboard UPEV</title>
+{% endblock head_content %}
+
+
+{# Container del dashboard#}
+{% block container %}
+
+    
+    <div id="comentario-post"></div>
+
+
+    <script>
+        window.addEventListener('DOMContentLoaded',()=>{
+            const postBody = document.getElementById('comentario-post')
+            let body = JSON.parse("{{comentario.comentario|escapejs}}")
+            let blocks=body.blocks
+            for(let index = 0; index < blocks.length; index++){
+                switch (blocks[index].type){
+                    case 'Header':
+                        let head = document.createElement(`h${blocks[index].data.level}`)
+                        head.textContent=blocks[index].data.text
+                        postBody.appendChild(head)
+                        break;
+                    case 'Image':
+                        let div=document.createElement('div')
+                        let image = document.createElement('img')
+                        let caption = document.createElement('h5')
+                        image.src=`http://localhost:8000${blocks[index].data.file.url}`
+                        caption.textContent=blocks[index].data.caption
+                        div.appendChild(image)
+                        div.appendChild(caption)
+                        postBody.appendChild(div)
+                        break;
+                    case 'List':
+                        let list;
+                        if(blocks[index].data.style=='unordered'){
+                            list=document.createElement('ul')
+                        }else{
+                            list=document.createElement('ol')
+                        }
+                            for(const item in blocks[index].data.items){
+                                let li = document.createElement('li')
+                                li.textContent=blocks[index].data.items[item]
+                                list.appendChild(li)
+                            }
+                            postBody.appendChild(list)
+                        break;
+                    
+                    case 'Raw':
+                        let blockquote=document.createElement('blockquote')
+                        let code=document.createElement('code')
+                        let pre=document.createElement('pre')
+                        pre.textContent=blocks[index].data.html
+                        pre.style.background='#131313'
+                        pre.style.color='#dddddd'
+                        pre.style.padding = '15px'
+                        code.appendChild(pre)
+                        postBody.appendChild(code)
+                        break;
+
+                    case 'Attaches':
+                        let parent = document.createElement('div')
+                        let a = document.createElement('a')
+                        let name = document.createElement('h3')
+                        //let size=document.createElement('h3')
+                        a.href=`http://localhost:8000${blocks[index].data.file.url}`
+                        a.textContent=`Descargar ${blocks[index].data.file.extension}`
+                        name.textContent=blocks[index].data.file.name
+                        //size.textContent=blocks[index].data.file.size
+                        parent.appendChild(a)
+                        parent.appendChild(name)
+                        //parent.appendChild(size)
+                        postBody.appendChild(parent)
+                        break;
+                    case 'paragraph':
+                        const p=document.createElement('p')
+                        p.innerHTML=blocks[index].data.text
+                        postBody.appendChild(p)
+                    default:
+                        break;
+                }   
+            }
+
+        })
+    </script>
+
+
+{% endblock %}

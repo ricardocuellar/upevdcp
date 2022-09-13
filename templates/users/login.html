@@ -1,0 +1,39 @@
+{%extends "users/base.html" %}
+
+
+{% block head_content %}
+<title>UPEV | Inicio de Sesión</title>
+{% endblock head_content %}
+    
+
+{% block container %}
+
+    
+    {% if form.errors %}
+        <div class="alert alert-danger">Tu usuario y contraseña no coinciden.</div>
+    {% endif %}
+        
+
+    <form method="POST" action="{% url "users:login" %}">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <input type="text" placeholder="Usuario" name="username" id="" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <input type="password" placeholder="Contaseña"name="password" id=""  class="form-control">
+        </div>
+
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary btn-block mt-5"value="Iniciar sesión" class="form-control" >
+        </div>
+
+        
+        
+        
+    </form>
+    
+    
+    {% endblock container %}
+    

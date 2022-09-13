@@ -1,0 +1,60 @@
+
+{%extends "coordinadorUPEV/dashboardUPEV.html" %}
+
+
+{# Container del dashboard#}
+{% block container %}
+
+<h2>ETP que estan siendo evaluadas</h2>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Oficio</th>
+        <th scope="col">UAL</th>
+        <th scope="col">Fecha inicio</th>
+        <th scope="col">Equipo</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Observaciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for etp in etps  %}  
+      
+      {% if etp.solicitud_aprobada == 1 %}
+        
+
+        <tr>
+          <td scope="row">{{etp.oficio}}</td>
+          <td>{{etp.materia}}</td>
+          <td>{{etp.created}}</td>
+          
+          {% if etp.equipo == '' %}
+              <td>Sin equipo asignado</td>
+          {% else %}
+              <td>{{etp.equipo.id}}</td>
+          {% endif %}
+          <td>{{etp.estado}}</td>
+          <td>
+            
+            {% if etp.estado == 'Espera' %}
+              <a href="{% url 'dashboard:tablaComentarios' etpID=etp.id %}">Ver</a>  
+            {% endif %}
+            
+          </td>
+        </tr>
+
+      {% endif %}
+
+      {% endfor %}
+
+    </tbody>
+  </table>
+
+  <hr>
+
+
+
+{% endblock %}
+
+
+  

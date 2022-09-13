@@ -1,0 +1,23 @@
+{%extends "evaluadorUPEV/dashboardEvaluador.html" %}
+
+{# Container del dashboard#}
+{% block container %}
+    <h1>Bienvenido {{request.user}}</h1>
+    <p></p>
+
+    <div class="upev-dashboard-menu">
+        <div class="row">
+            
+                <a class="col" href="{% url 'dashboard:tableroActividades' %}">
+                    Tablero actividades
+                </a>
+            
+                <a class="col" href="{% url 'dashboard:pasadasActividades' %}">
+                    Actividades pasadas
+                </a>
+           
+            
+    </div>
+        
+
+{% endblock %}
